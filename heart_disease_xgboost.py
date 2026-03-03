@@ -2,23 +2,15 @@
 # coding: utf-8
 
 # In[85]:
-
-
+import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-import warnings
-warnings.filterwarnings('ignore')
-
-from sklearn.model_selection import train_test_split, cross_val_score, StratifiedKFold
+from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import (
-    accuracy_score, classification_report, confusion_matrix,
-    roc_auc_score, roc_curve, ConfusionMatrixDisplay
-)
-from xgboost import XGBClassifier, plot_importance
-
+from sklearn.metrics import accuracy_score, roc_auc_score, confusion_matrix, classification_report
+from xgboost import XGBClassifier
 
 # In[86]:
 
