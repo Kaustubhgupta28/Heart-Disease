@@ -210,7 +210,7 @@ st.markdown("""<div class="sec-head">
   <div><p class="sec-title">Personal Information</p><p class="sec-sub">Basic demographic and physical details</p></div>
 </div><div class="card">""", unsafe_allow_html=True)
 c1,c2,c3,c4 = st.columns(4)
-with c1: age = st.number_input("AGE (YEARS)", min_value=1, max_value=120, value=0)
+with c1: age = st.number_input("AGE (YEARS)", min_value=0, max_value=120, value=0)
 with c2: gender = st.selectbox("GENDER", ["Select","Male","Female"])
 with c3: bmi = st.number_input("BMI", min_value=0.0, max_value=70.0, value=0.0, step=0.1)
 with c4: sleep = st.number_input("SLEEP HOURS/DAY", min_value=0, max_value=24, value=0)
