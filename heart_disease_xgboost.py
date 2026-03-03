@@ -45,7 +45,9 @@ df.describe(include='all').T
 
 
 # Missing value heatmap
-missing = df.isnull().sum()
+missing     = df.isnull().sum()
+missing_pct = (missing / len(df) * 100).round(2)
+missing_df  = pd.DataFrame({'Missing Count': missing, 'Missing %': missing_pct})
 
 print(missing_df[missing_df['Missing Count'] > 0])
 
@@ -55,7 +57,7 @@ plt.title('Missing Value Percentage by Column', fontsize=14)
 plt.ylabel('Missing %')
 plt.xticks(rotation=45, ha='right')
 plt.tight_layout()
-plt.show()
+st.pyplot(plt)
 
 
 # In[89]:
