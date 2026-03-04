@@ -28,16 +28,23 @@ header {visibility: hidden;}
 }
 section[data-testid="stMain"] > div:first-child { padding-top: 0 !important; }
 
-/* Make the hearts iframe fullscreen overlay */
+/* iframe BEHIND everything */
 iframe:first-of-type {
     position: fixed !important;
     top: 0 !important; left: 0 !important;
     width: 100vw !important;
     height: 100vh !important;
-    z-index: 999999 !important;
+    z-index: 0 !important;
     pointer-events: none !important;
     border: none !important;
     background: transparent !important;
+}
+/* all content ABOVE iframe */
+.hero, .wrap, .foot,
+section[data-testid="stMain"],
+div[data-testid="stVerticalBlock"] {
+    position: relative !important;
+    z-index: 1 !important;
 }
 
 @keyframes hb { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
@@ -47,7 +54,7 @@ iframe:first-of-type {
     display: flex !important; align-items: center !important;
     justify-content: space-between !important;
     min-height: clamp(200px,30vw,300px) !important;
-    position: relative !important; overflow: hidden !important;
+    overflow: hidden !important;
     flex-wrap: wrap !important; gap: 20px !important;
 }
 .hero h1 { font-family:'Outfit',sans-serif !important; font-size:clamp(2rem,5vw,3.5rem) !important; font-weight:900 !important; color:white !important; line-height:1.1 !important; margin:0 0 12px 0 !important; position:relative !important; z-index:2 !important; }
@@ -57,7 +64,7 @@ iframe:first-of-type {
 .vd1{width:55px;height:55px;top:15%;right:8%;}
 .vd2{width:38px;height:38px;bottom:15%;right:4%;}
 .vd3{width:25px;height:25px;top:20%;right:28%;}
-.wrap { padding:clamp(20px,4vw,40px) clamp(16px,6vw,80px) 60px !important; position:relative !important; z-index:1 !important; }
+.wrap { padding:clamp(20px,4vw,40px) clamp(16px,6vw,80px) 60px !important; }
 .sec-head { display:flex !important; align-items:center !important; gap:14px !important; margin:28px 0 14px !important; flex-wrap:wrap !important; }
 .sec-icon { width:40px !important; height:40px !important; border-radius:10px !important; display:flex !important; align-items:center !important; justify-content:center !important; font-size:1.1rem !important; flex-shrink:0 !important; }
 .ic-red{background:linear-gradient(135deg,#9b0030,#c1121f) !important;}
@@ -105,41 +112,52 @@ div[data-testid="stButton"] > button:hover{transform:translateY(-2px) !important
 st.markdown('<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">', unsafe_allow_html=True)
 st.markdown(CSS, unsafe_allow_html=True)
 
-# ── HEARTS: proper height iframe, CSS makes it fullscreen overlay ─────────────
+# ── HEARTS: fullscreen overlay BEHIND page, spawn from random spots ──────────
 components.html("""
 <!DOCTYPE html>
 <html>
 <head>
 <style>
-*{margin:0;padding:0;}
-html,body{width:100vw;height:100vh;overflow:hidden;background:transparent;}
-.h{position:absolute;pointer-events:none;animation:up linear forwards;}
-@keyframes up{
-  0%  {opacity:0; transform:translateY(0)   translateX(0)    rotate(-20deg) scale(1);}
-  8%  {opacity:1;}
-  40% {transform:translateY(-35vh) translateX(18px)  rotate(12deg)  scale(0.88);}
-  75% {transform:translateY(-72vh) translateX(-14px) rotate(-8deg)  scale(0.65); opacity:0.7;}
-  100%{transform:translateY(-105vh) translateX(8px) rotate(20deg)  scale(0.4);  opacity:0;}
+* { margin:0; padding:0; }
+html, body { width:100vw; height:100vh; overflow:hidden; background:transparent; }
+.h {
+    position: fixed;
+    pointer-events: none;
+    opacity: 0;
+    animation: fly linear forwards;
+}
+@keyframes fly {
+    0%   { opacity:0;   transform: translateY(0)     translateX(0)           rotate(-15deg) scale(1);    }
+    12%  { opacity:0.55; }
+    50%  { opacity:0.45; transform: translateY(-38vh) translateX(var(--dx1)) rotate(8deg)   scale(0.82); }
+    88%  { opacity:0.2; }
+    100% { opacity:0;   transform: translateY(-88vh) translateX(var(--dx2)) rotate(22deg)  scale(0.45); }
 }
 </style>
 </head>
 <body>
 <script>
-const items=['❤️','🩷','💗','💕','💖','🌹','🌸','🌺','🌷','💐'];
+const items = ['❤️','🩷','💗','💕','💖','🌹','🌸','🌺','🌷'];
+function rnd(a,b){ return a + Math.random()*(b-a); }
+
 function spawn(){
-  const e=document.createElement('div');
-  e.className='h';
-  e.textContent=items[Math.floor(Math.random()*items.length)];
-  e.style.left=(Math.random()*96)+'vw';
-  e.style.bottom='-60px';
-  e.style.fontSize=(14+Math.random()*24)+'px';
-  const d=4+Math.random()*6;
-  e.style.animationDuration=d+'s';
-  document.body.appendChild(e);
-  setTimeout(()=>e.remove(),(d+1)*1000);
+    const el = document.createElement('div');
+    el.className = 'h';
+    el.textContent = items[Math.floor(Math.random()*items.length)];
+    // random position anywhere on screen — feels like floating from within the page
+    el.style.left     = rnd(1,95)  + 'vw';
+    el.style.top      = rnd(15,80) + 'vh';
+    el.style.fontSize = rnd(13,28) + 'px';
+    el.style.setProperty('--dx1', rnd(-50,50)+'px');
+    el.style.setProperty('--dx2', rnd(-80,80)+'px');
+    const dur = rnd(4.5,9);
+    el.style.animationDuration = dur+'s';
+    el.style.animationDelay   = rnd(0,1.5)+'s';
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),(dur+2.5)*1000);
 }
-for(let i=0;i<18;i++) setTimeout(spawn,i*250);
-setInterval(spawn,350);
+for(let i=0;i<22;i++) setTimeout(spawn, i*280);
+setInterval(spawn, 380);
 </script>
 </body>
 </html>
@@ -217,7 +235,7 @@ def load_model():
         le = LabelEncoder(); df[c] = le.fit_transform(df[c]); encoders[c] = le
     X = df.drop('Heart_Disease', axis=1); y = df['Heart_Disease']
     sc = StandardScaler(); Xs = sc.fit_transform(X)
-    Xtr, _, ytr, _ = train_test_split(Xs, y, test_size=0.2, random_state=42)
+    Xtr,_,ytr,_ = train_test_split(Xs, y, test_size=0.2, random_state=42)
     m = xgb.XGBClassifier(n_estimators=200, max_depth=5, learning_rate=0.1,
                            random_state=42, use_label_encoder=False, eval_metric='logloss')
     m.fit(Xtr, ytr)
@@ -228,7 +246,7 @@ model, scaler, encoders, feature_cols = load_model()
 st.markdown('<div class="wrap">', unsafe_allow_html=True)
 
 st.markdown("""
-<div class="sec-head"><div class="sec-icon ic-orange">⚠️</div><div><p class="sec-title">Common Causes of Heart Disease</p><p class="sec-sub">Understanding the key risk factors that contribute to heart conditions</p></div></div>
+<div class="sec-head"><div class="sec-icon ic-orange">⚠️</div><div><p class="sec-title">Common Causes of Heart Disease</p><p class="sec-sub">Understanding the key risk factors</p></div></div>
 <div class="card"><div class="causes-grid">
   <div class="cause-card"><span class="cause-icon">🚬</span><p class="cause-title">Smoking</p><p class="cause-desc">Tobacco damages blood vessel walls, reduces oxygen in blood, and raises blood pressure significantly.</p></div>
   <div class="cause-card"><span class="cause-icon">🩸</span><p class="cause-title">High Blood Pressure</p><p class="cause-desc">Hypertension forces the heart to work harder, thickening the heart muscle and hardening arteries over time.</p></div>
@@ -244,23 +262,23 @@ st.markdown("""
 
 st.markdown("""<div class="sec-head"><div class="sec-icon ic-red">👤</div><div><p class="sec-title">Personal Information</p><p class="sec-sub">Basic demographic and physical details</p></div></div><div class="card">""", unsafe_allow_html=True)
 c1,c2,c3,c4 = st.columns([1,1,1,1])
-with c1: age    = st.number_input("AGE (YEARS)",       min_value=0,   max_value=120,  value=0)
-with c2: gender = st.selectbox("GENDER",               ["Select","Male","Female"])
-with c3: bmi    = st.number_input("BMI",               min_value=0.0, max_value=70.0, value=0.0, step=0.1)
-with c4: sleep  = st.number_input("SLEEP HOURS/DAY",   min_value=0,   max_value=24,   value=0)
+with c1: age    = st.number_input("AGE (YEARS)",     min_value=0,   max_value=120,  value=0)
+with c2: gender = st.selectbox("GENDER",             ["Select","Male","Female"])
+with c3: bmi    = st.number_input("BMI",             min_value=0.0, max_value=70.0, value=0.0, step=0.1)
+with c4: sleep  = st.number_input("SLEEP HOURS/DAY", min_value=0,   max_value=24,   value=0)
 st.markdown('</div>', unsafe_allow_html=True)
 
 st.markdown("""<div class="sec-head"><div class="sec-icon ic-blue">🔬</div><div><p class="sec-title">Clinical Measurements</p><p class="sec-sub">Lab results and vital signs</p></div></div><div class="card">""", unsafe_allow_html=True)
 c1,c2,c3 = st.columns(3)
 with c1:
-    bp  = st.number_input("BLOOD PRESSURE (mmHg)",    min_value=0,   max_value=300,  value=0)
-    fbs = st.number_input("FASTING BLOOD SUGAR (mg/dL)", min_value=0, max_value=500, value=0)
+    bp  = st.number_input("BLOOD PRESSURE (mmHg)",       min_value=0,   max_value=300,   value=0)
+    fbs = st.number_input("FASTING BLOOD SUGAR (mg/dL)",  min_value=0,   max_value=500,   value=0)
 with c2:
-    chol = st.number_input("CHOLESTEROL (mg/dL)",     min_value=0,   max_value=600,  value=0)
-    crp  = st.number_input("CRP LEVEL (mg/L)",        min_value=0.0, max_value=50.0, value=0.0, step=0.1)
+    chol = st.number_input("CHOLESTEROL (mg/dL)",         min_value=0,   max_value=600,   value=0)
+    crp  = st.number_input("CRP LEVEL (mg/L)",            min_value=0.0, max_value=50.0,  value=0.0, step=0.1)
 with c3:
-    trig = st.number_input("TRIGLYCERIDE (mg/dL)",    min_value=0,   max_value=1000, value=0)
-    homo = st.number_input("HOMOCYSTEINE (µmol/L)",   min_value=0.0, max_value=100.0,value=0.0, step=0.1)
+    trig = st.number_input("TRIGLYCERIDE (mg/dL)",        min_value=0,   max_value=1000,  value=0)
+    homo = st.number_input("HOMOCYSTEINE (µmol/L)",       min_value=0.0, max_value=100.0, value=0.0, step=0.1)
 st.markdown('</div>', unsafe_allow_html=True)
 
 st.markdown("""<div class="sec-head"><div class="sec-icon ic-green">🏃</div><div><p class="sec-title">Health &amp; Lifestyle</p><p class="sec-sub">Medical history and daily habits</p></div></div><div class="card">""", unsafe_allow_html=True)
