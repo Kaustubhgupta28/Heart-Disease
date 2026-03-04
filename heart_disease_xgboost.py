@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import LabelEncoder, StandardScaler
@@ -26,45 +27,7 @@ header {visibility: hidden;}
     max-width: 100% !important;
 }
 section[data-testid="stMain"] > div:first-child { padding-top: 0 !important; }
-
 @keyframes hb { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
-
-@keyframes floatUp {
-    0%   { bottom: -60px; opacity: 0;   transform: translateX(0px)   rotate(0deg);   }
-    10%  { opacity: 1; }
-    50%  { transform: translateX(30px)  rotate(180deg); opacity: 0.9; }
-    90%  { opacity: 0.7; }
-    100% { bottom: 110vh; opacity: 0;   transform: translateX(-20px) rotate(360deg); }
-}
-
-/* THE KEY: each particle is position:fixed independently */
-.fp {
-    position: fixed !important;
-    pointer-events: none !important;
-    z-index: 999999 !important;
-    animation: floatUp linear infinite !important;
-}
-.fp01{left:2%;   font-size:16px; animation-duration:7s;  animation-delay:0s;   }
-.fp02{left:7%;   font-size:12px; animation-duration:9s;  animation-delay:1.4s; }
-.fp03{left:13%;  font-size:20px; animation-duration:6s;  animation-delay:0.6s; }
-.fp04{left:19%;  font-size:14px; animation-duration:8s;  animation-delay:2.3s; }
-.fp05{left:26%;  font-size:11px; animation-duration:7s;  animation-delay:3.2s; }
-.fp06{left:33%;  font-size:18px; animation-duration:10s; animation-delay:1.0s; }
-.fp07{left:40%;  font-size:13px; animation-duration:7s;  animation-delay:1.9s; }
-.fp08{left:47%;  font-size:16px; animation-duration:8s;  animation-delay:2.7s; }
-.fp09{left:55%;  font-size:11px; animation-duration:9s;  animation-delay:0.5s; }
-.fp10{left:62%;  font-size:19px; animation-duration:6s;  animation-delay:4.0s; }
-.fp11{left:69%;  font-size:14px; animation-duration:7s;  animation-delay:1.2s; }
-.fp12{left:76%;  font-size:12px; animation-duration:8s;  animation-delay:3.1s; }
-.fp13{left:83%;  font-size:17px; animation-duration:6s;  animation-delay:0.8s; }
-.fp14{left:90%;  font-size:15px; animation-duration:9s;  animation-delay:4.4s; }
-.fp15{left:96%;  font-size:20px; animation-duration:11s; animation-delay:1.7s; }
-.fp16{left:10%;  font-size:13px; animation-duration:8s;  animation-delay:5.2s; }
-.fp17{left:35%;  font-size:16px; animation-duration:7s;  animation-delay:2.5s; }
-.fp18{left:58%;  font-size:18px; animation-duration:9s;  animation-delay:3.8s; }
-.fp19{left:80%;  font-size:11px; animation-duration:6s;  animation-delay:2.0s; }
-.fp20{left:50%;  font-size:14px; animation-duration:10s; animation-delay:0.3s; }
-
 .hero {
     background: linear-gradient(135deg, #7b0020, #9b0030, #6d001c) !important;
     padding: clamp(30px, 5vw, 60px) clamp(20px, 6vw, 80px) !important;
@@ -77,66 +40,31 @@ section[data-testid="stMain"] > div:first-child { padding-top: 0 !important; }
     flex-wrap: wrap !important;
     gap: 20px !important;
 }
-.hero h1 {
-    font-family: 'Outfit', sans-serif !important;
-    font-size: clamp(2rem, 5vw, 3.5rem) !important;
-    font-weight: 900 !important;
-    color: white !important;
-    line-height: 1.1 !important;
-    margin: 0 0 12px 0 !important;
-    position: relative !important;
-    z-index: 2 !important;
-}
-.hero p {
-    font-family: 'Inter', sans-serif !important;
-    color: rgba(255,255,255,0.6) !important;
-    font-size: clamp(0.8rem, 1.5vw, 1rem) !important;
-    font-weight: 300 !important;
-    line-height: 1.7 !important;
-    margin: 0 !important;
-    position: relative !important;
-    z-index: 2 !important;
-}
-.hero-heart {
-    animation: hb 2s ease-in-out infinite !important;
-    flex-shrink: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    position: relative !important;
-    z-index: 2 !important;
-}
-.vdot {
-    position: absolute !important;
-    border-radius: 50% !important;
-    background: radial-gradient(circle at 30% 30%, rgba(255,150,150,0.5), rgba(180,30,60,0.7)) !important;
-    z-index: 1 !important;
-}
+.hero h1 { font-family:'Outfit',sans-serif !important; font-size:clamp(2rem,5vw,3.5rem) !important; font-weight:900 !important; color:white !important; line-height:1.1 !important; margin:0 0 12px 0 !important; position:relative !important; z-index:2 !important; }
+.hero p  { font-family:'Inter',sans-serif !important; color:rgba(255,255,255,0.6) !important; font-size:clamp(0.8rem,1.5vw,1rem) !important; font-weight:300 !important; line-height:1.7 !important; margin:0 !important; position:relative !important; z-index:2 !important; }
+.hero-heart { animation:hb 2s ease-in-out infinite !important; flex-shrink:0 !important; display:flex !important; align-items:center !important; justify-content:center !important; position:relative !important; z-index:2 !important; }
+.vdot { position:absolute !important; border-radius:50% !important; background:radial-gradient(circle at 30% 30%,rgba(255,150,150,0.5),rgba(180,30,60,0.7)) !important; z-index:1 !important; }
 .vd1{width:55px;height:55px;top:15%;right:8%;}
 .vd2{width:38px;height:38px;bottom:15%;right:4%;}
 .vd3{width:25px;height:25px;top:20%;right:28%;}
-.wrap {
-    padding: clamp(20px, 4vw, 40px) clamp(16px, 6vw, 80px) 60px !important;
-    position: relative !important;
-    z-index: 1 !important;
-}
-.sec-head { display: flex !important; align-items: center !important; gap: 14px !important; margin: 28px 0 14px !important; flex-wrap: wrap !important; }
-.sec-icon { width: 40px !important; height: 40px !important; border-radius: 10px !important; display: flex !important; align-items: center !important; justify-content: center !important; font-size: 1.1rem !important; flex-shrink: 0 !important; }
-.ic-red    { background: linear-gradient(135deg,#9b0030,#c1121f) !important; }
-.ic-blue   { background: linear-gradient(135deg,#1d4ed8,#3b82f6) !important; }
-.ic-green  { background: linear-gradient(135deg,#15803d,#22c55e) !important; }
-.ic-orange { background: linear-gradient(135deg,#c2410c,#f97316) !important; }
-.ic-purple { background: linear-gradient(135deg,#7c3aed,#a78bfa) !important; }
+.wrap { padding:clamp(20px,4vw,40px) clamp(16px,6vw,80px) 60px !important; position:relative !important; z-index:1 !important; }
+.sec-head { display:flex !important; align-items:center !important; gap:14px !important; margin:28px 0 14px !important; flex-wrap:wrap !important; }
+.sec-icon { width:40px !important; height:40px !important; border-radius:10px !important; display:flex !important; align-items:center !important; justify-content:center !important; font-size:1.1rem !important; flex-shrink:0 !important; }
+.ic-red    { background:linear-gradient(135deg,#9b0030,#c1121f) !important; }
+.ic-blue   { background:linear-gradient(135deg,#1d4ed8,#3b82f6) !important; }
+.ic-green  { background:linear-gradient(135deg,#15803d,#22c55e) !important; }
+.ic-orange { background:linear-gradient(135deg,#c2410c,#f97316) !important; }
+.ic-purple { background:linear-gradient(135deg,#7c3aed,#a78bfa) !important; }
 .sec-title { font-family:'Outfit',sans-serif !important; font-size:clamp(0.95rem,2vw,1.1rem) !important; font-weight:700 !important; color:#111 !important; margin:0 !important; }
 .sec-sub   { font-size:0.75rem !important; color:#888 !important; margin:2px 0 0 !important; }
-.card { background: white !important; border-radius: 16px !important; padding: clamp(16px, 3vw, 28px) !important; border: 1px solid #e5e7eb !important; box-shadow: 0 2px 12px rgba(0,0,0,0.06) !important; margin-bottom: 8px !important; }
-div[data-testid="stNumberInput"] input { background: #f9fafb !important; border: 1.5px solid #e5e7eb !important; border-radius: 10px !important; color: #111 !important; }
-div[data-testid="stSelectbox"] > div > div { background: #f9fafb !important; border: 1.5px solid #e5e7eb !important; border-radius: 10px !important; }
-div[data-testid="stNumberInput"] label, div[data-testid="stSelectbox"] label { font-size: 0.72rem !important; font-weight: 600 !important; color: #666 !important; text-transform: uppercase !important; letter-spacing: 0.04em !important; }
-div[data-testid="stButton"] > button { background: linear-gradient(135deg, #9b0030, #c1121f) !important; color: white !important; border: none !important; border-radius: 14px !important; padding: 16px 40px !important; font-family: 'Outfit', sans-serif !important; font-size: 1rem !important; font-weight: 700 !important; letter-spacing: 0.06em !important; width: 100% !important; box-shadow: 0 4px 20px rgba(155,0,48,0.4) !important; }
-div[data-testid="stButton"] > button:hover { transform: translateY(-2px) !important; }
-.res-high { background: linear-gradient(135deg,#7b0020,#c1121f) !important; border-radius: 20px !important; padding: clamp(24px,4vw,40px) !important; text-align: center !important; color: white !important; box-shadow: 0 12px 40px rgba(155,0,48,0.4) !important; margin: 20px 0 !important; }
-.res-low  { background: linear-gradient(135deg,#14532d,#15803d) !important; border-radius: 20px !important; padding: clamp(24px,4vw,40px) !important; text-align: center !important; color: white !important; box-shadow: 0 12px 40px rgba(21,128,61,0.38) !important; margin: 20px 0 !important; }
+.card { background:white !important; border-radius:16px !important; padding:clamp(16px,3vw,28px) !important; border:1px solid #e5e7eb !important; box-shadow:0 2px 12px rgba(0,0,0,0.06) !important; margin-bottom:8px !important; }
+div[data-testid="stNumberInput"] input { background:#f9fafb !important; border:1.5px solid #e5e7eb !important; border-radius:10px !important; color:#111 !important; }
+div[data-testid="stSelectbox"] > div > div { background:#f9fafb !important; border:1.5px solid #e5e7eb !important; border-radius:10px !important; }
+div[data-testid="stNumberInput"] label, div[data-testid="stSelectbox"] label { font-size:0.72rem !important; font-weight:600 !important; color:#666 !important; text-transform:uppercase !important; letter-spacing:0.04em !important; }
+div[data-testid="stButton"] > button { background:linear-gradient(135deg,#9b0030,#c1121f) !important; color:white !important; border:none !important; border-radius:14px !important; padding:16px 40px !important; font-family:'Outfit',sans-serif !important; font-size:1rem !important; font-weight:700 !important; letter-spacing:0.06em !important; width:100% !important; box-shadow:0 4px 20px rgba(155,0,48,0.4) !important; }
+div[data-testid="stButton"] > button:hover { transform:translateY(-2px) !important; }
+.res-high { background:linear-gradient(135deg,#7b0020,#c1121f) !important; border-radius:20px !important; padding:clamp(24px,4vw,40px) !important; text-align:center !important; color:white !important; box-shadow:0 12px 40px rgba(155,0,48,0.4) !important; margin:20px 0 !important; }
+.res-low  { background:linear-gradient(135deg,#14532d,#15803d) !important; border-radius:20px !important; padding:clamp(24px,4vw,40px) !important; text-align:center !important; color:white !important; box-shadow:0 12px 40px rgba(21,128,61,0.38) !important; margin:20px 0 !important; }
 .r-emoji { font-size:clamp(2rem,5vw,3rem); display:block; margin-bottom:10px; }
 .r-title { font-family:'Outfit',sans-serif; font-size:clamp(1.3rem,3vw,2rem); font-weight:900; margin:0 0 6px; }
 .r-pct   { font-family:'Outfit',sans-serif; font-size:clamp(3rem,8vw,5rem); font-weight:900; line-height:1; margin:10px 0; }
@@ -144,13 +72,13 @@ div[data-testid="stButton"] > button:hover { transform: translateY(-2px) !import
 .r-track { height:10px; background:rgba(255,255,255,0.15); border-radius:999px; overflow:hidden; margin:18px auto; max-width:360px; }
 .r-fill  { height:100%; border-radius:999px; background:linear-gradient(90deg,rgba(255,255,255,0.4),white); }
 .r-pill  { display:inline-block; border-radius:999px; padding:6px 20px; font-weight:700; font-size:0.78rem; letter-spacing:0.1em; margin-top:14px; background:rgba(255,255,255,0.15); color:white; border:1px solid rgba(255,255,255,0.3); }
-.causes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 4px; }
-.cause-card  { background: white; border-radius: 14px; padding: 18px; border: 1px solid #e5e7eb; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-.cause-icon  { font-size: 1.8rem; margin-bottom: 8px; display: block; }
+.causes-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:4px; }
+.cause-card  { background:white; border-radius:14px; padding:18px; border:1px solid #e5e7eb; box-shadow:0 2px 8px rgba(0,0,0,0.05); }
+.cause-icon  { font-size:1.8rem; margin-bottom:8px; display:block; }
 .cause-title { font-family:'Outfit',sans-serif; font-size:0.9rem; font-weight:700; color:#1a1a2e; margin-bottom:5px; }
 .cause-desc  { font-size:0.76rem; color:#6b7280; line-height:1.6; }
-.sug-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 4px; }
-.sug-card  { border-radius: 14px; padding: 16px 18px; border-left: 4px solid; }
+.sug-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px; margin-top:4px; }
+.sug-card  { border-radius:14px; padding:16px 18px; border-left:4px solid; }
 .sug-card.red    { background:#fff5f5; border-color:#e63946; }
 .sug-card.orange { background:#fff7ed; border-color:#f97316; }
 .sug-card.green  { background:#f0fdf4; border-color:#22c55e; }
@@ -167,29 +95,76 @@ div[data-testid="stButton"] > button:hover { transform: translateY(-2px) !import
 st.markdown('<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">', unsafe_allow_html=True)
 st.markdown(CSS, unsafe_allow_html=True)
 
-# Particles injected as FIRST element — position:fixed works here
-st.markdown("""
-<span class="fp fp01">❤️</span>
-<span class="fp fp02">🌹</span>
-<span class="fp fp03">🩷</span>
-<span class="fp fp04">🌸</span>
-<span class="fp fp05">💗</span>
-<span class="fp fp06">🌺</span>
-<span class="fp fp07">❤️</span>
-<span class="fp fp08">🌷</span>
-<span class="fp fp09">🩷</span>
-<span class="fp fp10">💐</span>
-<span class="fp fp11">🌹</span>
-<span class="fp fp12">💗</span>
-<span class="fp fp13">❤️</span>
-<span class="fp fp14">🌸</span>
-<span class="fp fp15">🌺</span>
-<span class="fp fp16">💕</span>
-<span class="fp fp17">🌷</span>
-<span class="fp fp18">🩷</span>
-<span class="fp fp19">💐</span>
-<span class="fp fp20">❤️</span>
-""", unsafe_allow_html=True)
+# ── FLOATING HEARTS OVERLAY ──────────────────────────────────────────────────
+components.html("""
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:100%; height:100%; background:transparent; overflow:hidden; }
+.heart {
+    position: fixed;
+    bottom: -80px;
+    font-size: 24px;
+    opacity: 0;
+    animation: flyUp linear infinite;
+    pointer-events: none;
+    z-index: 999999;
+    filter: drop-shadow(0 2px 4px rgba(200,0,50,0.3));
+}
+@keyframes flyUp {
+    0%   { transform: translateY(0)      translateX(0)    rotate(-15deg) scale(1);   opacity: 0;   }
+    10%  { opacity: 0.9; }
+    30%  { transform: translateY(-30vh)  translateX(20px) rotate(10deg)  scale(0.9); }
+    60%  { transform: translateY(-60vh)  translateX(-15px) rotate(-8deg) scale(0.75); opacity: 0.7; }
+    90%  { opacity: 0.3; }
+    100% { transform: translateY(-105vh) translateX(10px) rotate(15deg)  scale(0.5); opacity: 0; }
+}
+</style>
+</head>
+<body>
+<script>
+const emojis = ['❤️','🩷','💗','💕','💖','🌹','🌸','🌺','🌷'];
+const colors = ['#ff4466','#ff6b8a','#ff2255','#e8174a','#ff88aa'];
+
+function createHeart() {
+    const el = document.createElement('div');
+    el.className = 'heart';
+
+    // random emoji or SVG heart
+    const useEmoji = Math.random() > 0.3;
+    if (useEmoji) {
+        el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        el.style.fontSize = (16 + Math.random() * 28) + 'px';
+    } else {
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const size  = 20 + Math.random() * 30;
+        el.innerHTML = `<svg width="${size}" height="${size}" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 82 C50 82 8 55 8 28 C8 14 19 5 32 5 C40 5 47 9 50 15 C53 9 60 5 68 5 C81 5 92 14 92 28 C92 55 50 82 50 82Z"
+                  fill="${color}" opacity="0.85"/>
+        </svg>`;
+    }
+
+    el.style.left            = (Math.random() * 100) + 'vw';
+    const dur                = 4 + Math.random() * 6;
+    el.style.animationDuration  = dur + 's';
+    el.style.animationDelay     = (Math.random() * 3) + 's';
+
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), (dur + 4) * 1000);
+}
+
+// spawn 20 staggered at start
+for (let i = 0; i < 20; i++) {
+    setTimeout(createHeart, i * 300);
+}
+// then keep spawning continuously
+setInterval(createHeart, 400);
+</script>
+</body>
+</html>
+""", height=0, scrolling=False)
 
 st.markdown("""
 <div class="hero">
@@ -201,25 +176,12 @@ st.markdown("""
     <p>Analyzing risk factors to forecast likelihood of<br>developing heart conditions.</p>
   </div>
   <div class="hero-heart">
-    <svg viewBox="0 0 100 90" width="220" height="200" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 8px 24px rgba(255,80,80,0.5));">
+    <svg viewBox="0 0 100 90" width="220" height="200" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 8px 24px rgba(255,80,80,0.5));">
       <defs>
-        <radialGradient id="hg1" cx="40%" cy="35%" r="60%">
-          <stop offset="0%" stop-color="#ff6b8a"/>
-          <stop offset="40%" stop-color="#e8174a"/>
-          <stop offset="100%" stop-color="#8b0000"/>
-        </radialGradient>
-        <radialGradient id="hg2" cx="30%" cy="30%" r="40%">
-          <stop offset="0%" stop-color="rgba(255,255,255,0.6)"/>
-          <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-        </radialGradient>
-        <radialGradient id="hg3" cx="70%" cy="70%" r="40%">
-          <stop offset="0%" stop-color="#6b0000"/>
-          <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
-        </radialGradient>
-        <filter id="glow">
-          <feGaussianBlur stdDeviation="2.5" result="blur"/>
-          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
+        <radialGradient id="hg1" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#ff6b8a"/><stop offset="40%" stop-color="#e8174a"/><stop offset="100%" stop-color="#8b0000"/></radialGradient>
+        <radialGradient id="hg2" cx="30%" cy="30%" r="40%"><stop offset="0%" stop-color="rgba(255,255,255,0.6)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></radialGradient>
+        <radialGradient id="hg3" cx="70%" cy="70%" r="40%"><stop offset="0%" stop-color="#6b0000"/><stop offset="100%" stop-color="rgba(0,0,0,0)"/></radialGradient>
+        <filter id="glow"><feGaussianBlur stdDeviation="2.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
       </defs>
       <path d="M50 82 C50 82 8 55 8 28 C8 14 19 5 32 5 C40 5 47 9 50 15 C53 9 60 5 68 5 C81 5 92 14 92 28 C92 55 50 82 50 82Z" fill="url(#hg1)" filter="url(#glow)"/>
       <path d="M50 82 C50 82 8 55 8 28 C8 14 19 5 32 5 C40 5 47 9 50 15 C53 9 60 5 68 5 C81 5 92 14 92 28 C92 55 50 82 50 82Z" fill="url(#hg3)" opacity="0.5"/>
@@ -373,17 +335,17 @@ c1, c2 = st.columns(2)
 with c1:
     r1, r2 = st.columns(2)
     with r1:
-        smoking  = st.selectbox("SMOKING",       ["Select","Yes","No"])
-        fam_hist = st.selectbox("FAMILY HISTORY", ["Select","Yes","No"])
-        low_hdl  = st.selectbox("LOW HDL",        ["Select","Yes","No"])
-        exercise = st.selectbox("EXERCISE",       ["Select","Regular","Occasional","None"])
-        stress   = st.selectbox("STRESS LEVEL",   ["Select","High","Medium","Low"])
+        smoking  = st.selectbox("SMOKING",        ["Select","Yes","No"])
+        fam_hist = st.selectbox("FAMILY HISTORY",  ["Select","Yes","No"])
+        low_hdl  = st.selectbox("LOW HDL",         ["Select","Yes","No"])
+        exercise = st.selectbox("EXERCISE",        ["Select","Regular","Occasional","None"])
+        stress   = st.selectbox("STRESS LEVEL",    ["Select","High","Medium","Low"])
     with r2:
-        diabetes = st.selectbox("DIABETES",       ["Select","Yes","No"])
-        high_bp  = st.selectbox("HIGH BP",        ["Select","Yes","No"])
-        high_ldl = st.selectbox("HIGH LDL",       ["Select","Yes","No"])
-        alcohol  = st.selectbox("ALCOHOL",        ["Select","Heavy","Moderate","None"])
-        sugar    = st.selectbox("SUGAR INTAKE",   ["Select","High","Medium","Low"])
+        diabetes = st.selectbox("DIABETES",        ["Select","Yes","No"])
+        high_bp  = st.selectbox("HIGH BP",         ["Select","Yes","No"])
+        high_ldl = st.selectbox("HIGH LDL",        ["Select","Yes","No"])
+        alcohol  = st.selectbox("ALCOHOL",         ["Select","Heavy","Moderate","None"])
+        sugar    = st.selectbox("SUGAR INTAKE",    ["Select","High","Medium","Low"])
 st.markdown('</div>', unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
@@ -415,11 +377,11 @@ if predict:
             'Stress_Level': enc('Stress_Level', stress),
             'Sugar_Consumption': enc('Sugar_Consumption', sugar),
         }
-        df_in  = pd.DataFrame([inp])[feature_cols]
-        scaled = scaler.transform(df_in)
-        prob   = float(model.predict_proba(scaled)[0][1])
+        df_in    = pd.DataFrame([inp])[feature_cols]
+        scaled   = scaler.transform(df_in)
+        prob     = float(model.predict_proba(scaled)[0][1])
         pred_val = int(model.predict(scaled)[0])
-        pct    = round(prob * 100, 1)
+        pct      = round(prob * 100, 1)
         if pred_val == 1:
             level = "🔴 HIGH RISK" if pct >= 70 else "⚡ MEDIUM-HIGH RISK"
             st.markdown(f'<div class="res-high"><span class="r-emoji">🔥</span><p class="r-title">HIGH RISK DETECTED</p><p class="r-pct">{pct}%</p><p class="r-cap">Probability of developing heart disease</p><div class="r-track"><div class="r-fill" style="width:{pct}%"></div></div><span class="r-pill">{level}</span></div>', unsafe_allow_html=True)
@@ -428,7 +390,7 @@ if predict:
             st.markdown(f'<div class="res-low"><span class="r-emoji">✅</span><p class="r-title">LOW RISK</p><p class="r-pct">{pct}%</p><p class="r-cap">Probability of developing heart disease</p><div class="r-track"><div class="r-fill" style="width:{pct}%"></div></div><span class="r-pill">{level}</span></div>', unsafe_allow_html=True)
         suggestions = []
         if smoking == "Yes": suggestions.append(("red","🚬","Quit Smoking Immediately","Smoking is the #1 modifiable risk factor. Quitting within 1 year halves your heart disease risk."))
-        if bp > 140 or high_bp == "Yes": suggestions.append(("orange","🩸","Lower Your Blood Pressure","Reduce salt intake, avoid caffeine, exercise regularly."))
+        if bp > 140 or high_bp == "Yes": suggestions.append(("orange","🩸","Lower Your Blood Pressure","Reduce salt intake, avoid caffeine, and exercise regularly."))
         if chol > 240 or high_ldl == "Yes": suggestions.append(("orange","🥑","Improve Your Cholesterol","Cut saturated fats, eat more oats, nuts and olive oil."))
         if bmi > 30: suggestions.append(("red","⚖️","Manage Your Weight","A BMI above 30 significantly strains your heart."))
         if exercise == "None": suggestions.append(("blue","🏃","Start Exercising Regularly","Aim for 150 minutes of moderate activity per week."))
@@ -437,7 +399,7 @@ if predict:
         if diabetes == "Yes" or fbs > 126: suggestions.append(("teal","💉","Control Blood Sugar","Follow a low-glycaemic diet and take medication as prescribed."))
         if alcohol == "Heavy": suggestions.append(("orange","🍺","Reduce Alcohol Intake","Limit to max 1 drink/day for women and 2 for men."))
         if sleep < 6: suggestions.append(("blue","😴","Improve Sleep Quality","Less than 6 hours raises heart disease risk."))
-        if low_hdl == "Yes": suggestions.append(("green","🥜","Boost Your HDL Cholesterol","Eat more healthy fats and exercise regularly."))
+        if low_hdl == "Yes": suggestions.append(("green","🥜","Boost HDL Cholesterol","Eat more healthy fats and exercise regularly."))
         if trig > 200: suggestions.append(("orange","🐟","Lower Triglycerides","Cut sugar, refined carbs and alcohol."))
         if sugar == "High": suggestions.append(("red","🍬","Cut Down on Sugar","Replace sweets with fruits and whole grains."))
         if pred_val == 0:
