@@ -30,12 +30,40 @@ section[data-testid="stMain"] > div:first-child { padding-top: 0 !important; }
 @keyframes hb { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
 
 @keyframes floatUp {
-    0%   { transform: translateY(0px)    translateX(0px)   rotate(0deg)   scale(1);    opacity: 0;   }
+    0%   { bottom: -60px; opacity: 0;   transform: translateX(0px)   rotate(0deg);   }
     10%  { opacity: 1; }
-    50%  { transform: translateY(-300px) translateX(25px)  rotate(180deg) scale(0.85); opacity: 0.9; }
+    50%  { transform: translateX(30px)  rotate(180deg); opacity: 0.9; }
     90%  { opacity: 0.7; }
-    100% { transform: translateY(-650px) translateX(-15px) rotate(360deg) scale(0.4);  opacity: 0;   }
+    100% { bottom: 110vh; opacity: 0;   transform: translateX(-20px) rotate(360deg); }
 }
+
+/* THE KEY: each particle is position:fixed independently */
+.fp {
+    position: fixed !important;
+    pointer-events: none !important;
+    z-index: 999999 !important;
+    animation: floatUp linear infinite !important;
+}
+.fp01{left:2%;   font-size:16px; animation-duration:7s;  animation-delay:0s;   }
+.fp02{left:7%;   font-size:12px; animation-duration:9s;  animation-delay:1.4s; }
+.fp03{left:13%;  font-size:20px; animation-duration:6s;  animation-delay:0.6s; }
+.fp04{left:19%;  font-size:14px; animation-duration:8s;  animation-delay:2.3s; }
+.fp05{left:26%;  font-size:11px; animation-duration:7s;  animation-delay:3.2s; }
+.fp06{left:33%;  font-size:18px; animation-duration:10s; animation-delay:1.0s; }
+.fp07{left:40%;  font-size:13px; animation-duration:7s;  animation-delay:1.9s; }
+.fp08{left:47%;  font-size:16px; animation-duration:8s;  animation-delay:2.7s; }
+.fp09{left:55%;  font-size:11px; animation-duration:9s;  animation-delay:0.5s; }
+.fp10{left:62%;  font-size:19px; animation-duration:6s;  animation-delay:4.0s; }
+.fp11{left:69%;  font-size:14px; animation-duration:7s;  animation-delay:1.2s; }
+.fp12{left:76%;  font-size:12px; animation-duration:8s;  animation-delay:3.1s; }
+.fp13{left:83%;  font-size:17px; animation-duration:6s;  animation-delay:0.8s; }
+.fp14{left:90%;  font-size:15px; animation-duration:9s;  animation-delay:4.4s; }
+.fp15{left:96%;  font-size:20px; animation-duration:11s; animation-delay:1.7s; }
+.fp16{left:10%;  font-size:13px; animation-duration:8s;  animation-delay:5.2s; }
+.fp17{left:35%;  font-size:16px; animation-duration:7s;  animation-delay:2.5s; }
+.fp18{left:58%;  font-size:18px; animation-duration:9s;  animation-delay:3.8s; }
+.fp19{left:80%;  font-size:11px; animation-duration:6s;  animation-delay:2.0s; }
+.fp20{left:50%;  font-size:14px; animation-duration:10s; animation-delay:0.3s; }
 
 .hero {
     background: linear-gradient(135deg, #7b0020, #9b0030, #6d001c) !important;
@@ -45,10 +73,9 @@ section[data-testid="stMain"] > div:first-child { padding-top: 0 !important; }
     justify-content: space-between !important;
     min-height: clamp(200px, 30vw, 300px) !important;
     position: relative !important;
+    overflow: hidden !important;
     flex-wrap: wrap !important;
     gap: 20px !important;
-    overflow: visible !important;
-    margin-bottom: 0 !important;
 }
 .hero h1 {
     font-family: 'Outfit', sans-serif !important;
@@ -88,35 +115,10 @@ section[data-testid="stMain"] > div:first-child { padding-top: 0 !important; }
 .vd1{width:55px;height:55px;top:15%;right:8%;}
 .vd2{width:38px;height:38px;bottom:15%;right:4%;}
 .vd3{width:25px;height:25px;top:20%;right:28%;}
-
-/* particles live inside the hero which has overflow:visible so they float out upward */
-.fp {
-    position: absolute !important;
-    z-index: 3 !important;
-    pointer-events: none !important;
-    animation: floatUp linear infinite !important;
-}
-.fp01{bottom:0; left:2%;   font-size:16px; animation-duration:6s;  animation-delay:0s;   }
-.fp02{bottom:0; left:7%;   font-size:12px; animation-duration:8s;  animation-delay:1.4s; }
-.fp03{bottom:0; left:13%;  font-size:20px; animation-duration:7s;  animation-delay:0.6s; }
-.fp04{bottom:0; left:20%;  font-size:14px; animation-duration:9s;  animation-delay:2.3s; }
-.fp05{bottom:0; left:27%;  font-size:11px; animation-duration:6s;  animation-delay:3.2s; }
-.fp06{bottom:0; left:34%;  font-size:18px; animation-duration:10s; animation-delay:1.0s; }
-.fp07{bottom:0; left:41%;  font-size:13px; animation-duration:7s;  animation-delay:1.9s; }
-.fp08{bottom:0; left:48%;  font-size:16px; animation-duration:8s;  animation-delay:2.7s; }
-.fp09{bottom:0; left:55%;  font-size:11px; animation-duration:9s;  animation-delay:0.5s; }
-.fp10{bottom:0; left:62%;  font-size:19px; animation-duration:6s;  animation-delay:4.0s; }
-.fp11{bottom:0; left:69%;  font-size:14px; animation-duration:7s;  animation-delay:1.2s; }
-.fp12{bottom:0; left:76%;  font-size:12px; animation-duration:8s;  animation-delay:3.1s; }
-.fp13{bottom:0; left:83%;  font-size:17px; animation-duration:6s;  animation-delay:0.8s; }
-.fp14{bottom:0; left:90%;  font-size:15px; animation-duration:9s;  animation-delay:4.4s; }
-.fp15{bottom:0; left:96%;  font-size:20px; animation-duration:11s; animation-delay:1.7s; }
-
 .wrap {
     padding: clamp(20px, 4vw, 40px) clamp(16px, 6vw, 80px) 60px !important;
     position: relative !important;
     z-index: 1 !important;
-    margin-top: 0 !important;
 }
 .sec-head { display: flex !important; align-items: center !important; gap: 14px !important; margin: 28px 0 14px !important; flex-wrap: wrap !important; }
 .sec-icon { width: 40px !important; height: 40px !important; border-radius: 10px !important; display: flex !important; align-items: center !important; justify-content: center !important; font-size: 1.1rem !important; flex-shrink: 0 !important; }
@@ -165,26 +167,35 @@ div[data-testid="stButton"] > button:hover { transform: translateY(-2px) !import
 st.markdown('<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">', unsafe_allow_html=True)
 st.markdown(CSS, unsafe_allow_html=True)
 
+# Particles injected as FIRST element — position:fixed works here
+st.markdown("""
+<span class="fp fp01">❤️</span>
+<span class="fp fp02">🌹</span>
+<span class="fp fp03">🩷</span>
+<span class="fp fp04">🌸</span>
+<span class="fp fp05">💗</span>
+<span class="fp fp06">🌺</span>
+<span class="fp fp07">❤️</span>
+<span class="fp fp08">🌷</span>
+<span class="fp fp09">🩷</span>
+<span class="fp fp10">💐</span>
+<span class="fp fp11">🌹</span>
+<span class="fp fp12">💗</span>
+<span class="fp fp13">❤️</span>
+<span class="fp fp14">🌸</span>
+<span class="fp fp15">🌺</span>
+<span class="fp fp16">💕</span>
+<span class="fp fp17">🌷</span>
+<span class="fp fp18">🩷</span>
+<span class="fp fp19">💐</span>
+<span class="fp fp20">❤️</span>
+""", unsafe_allow_html=True)
+
 st.markdown("""
 <div class="hero">
   <div class="vdot vd1"></div>
   <div class="vdot vd2"></div>
   <div class="vdot vd3"></div>
-  <span class="fp fp01">❤️</span>
-  <span class="fp fp02">🌹</span>
-  <span class="fp fp03">🩷</span>
-  <span class="fp fp04">🌸</span>
-  <span class="fp fp05">💗</span>
-  <span class="fp fp06">🌺</span>
-  <span class="fp fp07">❤️</span>
-  <span class="fp fp08">🌷</span>
-  <span class="fp fp09">🩷</span>
-  <span class="fp fp10">💐</span>
-  <span class="fp fp11">🌹</span>
-  <span class="fp fp12">💗</span>
-  <span class="fp fp13">❤️</span>
-  <span class="fp fp14">🌸</span>
-  <span class="fp fp15">🌺</span>
   <div style="position:relative;z-index:2;">
     <h1>Heart Disease<br>Prediction</h1>
     <p>Analyzing risk factors to forecast likelihood of<br>developing heart conditions.</p>
@@ -417,12 +428,12 @@ if predict:
             st.markdown(f'<div class="res-low"><span class="r-emoji">✅</span><p class="r-title">LOW RISK</p><p class="r-pct">{pct}%</p><p class="r-cap">Probability of developing heart disease</p><div class="r-track"><div class="r-fill" style="width:{pct}%"></div></div><span class="r-pill">{level}</span></div>', unsafe_allow_html=True)
         suggestions = []
         if smoking == "Yes": suggestions.append(("red","🚬","Quit Smoking Immediately","Smoking is the #1 modifiable risk factor. Quitting within 1 year halves your heart disease risk."))
-        if bp > 140 or high_bp == "Yes": suggestions.append(("orange","🩸","Lower Your Blood Pressure","Your BP is elevated. Reduce salt intake, avoid caffeine, and exercise regularly."))
+        if bp > 140 or high_bp == "Yes": suggestions.append(("orange","🩸","Lower Your Blood Pressure","Reduce salt intake, avoid caffeine, exercise regularly."))
         if chol > 240 or high_ldl == "Yes": suggestions.append(("orange","🥑","Improve Your Cholesterol","Cut saturated fats, eat more oats, nuts and olive oil."))
-        if bmi > 30: suggestions.append(("red","⚖️","Manage Your Weight","A BMI above 30 significantly strains your heart. Aim to lose 5-10% body weight."))
+        if bmi > 30: suggestions.append(("red","⚖️","Manage Your Weight","A BMI above 30 significantly strains your heart."))
         if exercise == "None": suggestions.append(("blue","🏃","Start Exercising Regularly","Aim for 150 minutes of moderate activity per week."))
-        if exercise == "Occasional": suggestions.append(("blue","🏃","Increase Exercise Frequency","Try to be active 5 days a week for big heart benefits."))
-        if stress == "High": suggestions.append(("purple","🧘","Manage Stress Actively","Practice daily meditation, deep breathing, or yoga."))
+        if exercise == "Occasional": suggestions.append(("blue","🏃","Increase Exercise Frequency","Try to be active 5 days a week."))
+        if stress == "High": suggestions.append(("purple","🧘","Manage Stress Actively","Practice daily meditation or yoga."))
         if diabetes == "Yes" or fbs > 126: suggestions.append(("teal","💉","Control Blood Sugar","Follow a low-glycaemic diet and take medication as prescribed."))
         if alcohol == "Heavy": suggestions.append(("orange","🍺","Reduce Alcohol Intake","Limit to max 1 drink/day for women and 2 for men."))
         if sleep < 6: suggestions.append(("blue","😴","Improve Sleep Quality","Less than 6 hours raises heart disease risk."))
