@@ -25,9 +25,17 @@ header {visibility: hidden;}
     padding-right: 0 !important;
     max-width: 100% !important;
 }
-/* FIX: remove all extra space */
-.block-container > div:first-child { margin-top: 0 !important; padding-top: 0 !important; }
-section[data-testid="stMain"] > div { padding-top: 0 !important; }
+section[data-testid="stMain"] > div:first-child { padding-top: 0 !important; }
+
+@keyframes hb { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
+
+@keyframes floatUp {
+    0%   { transform: translateY(0px)    translateX(0px)   rotate(0deg)   scale(1);    opacity: 0;   }
+    10%  { opacity: 1; }
+    50%  { transform: translateY(-300px) translateX(25px)  rotate(180deg) scale(0.85); opacity: 0.9; }
+    90%  { opacity: 0.7; }
+    100% { transform: translateY(-650px) translateX(-15px) rotate(360deg) scale(0.4);  opacity: 0;   }
+}
 
 .hero {
     background: linear-gradient(135deg, #7b0020, #9b0030, #6d001c) !important;
@@ -40,6 +48,7 @@ section[data-testid="stMain"] > div { padding-top: 0 !important; }
     flex-wrap: wrap !important;
     gap: 20px !important;
     overflow: visible !important;
+    margin-bottom: 0 !important;
 }
 .hero h1 {
     font-family: 'Outfit', sans-serif !important;
@@ -70,58 +79,45 @@ section[data-testid="stMain"] > div { padding-top: 0 !important; }
     position: relative !important;
     z-index: 2 !important;
 }
-@keyframes hb { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
-.vdot { position: absolute !important; border-radius: 50% !important; background: radial-gradient(circle at 30% 30%, rgba(255,150,150,0.5), rgba(180,30,60,0.7)) !important; z-index:1 !important; }
+.vdot {
+    position: absolute !important;
+    border-radius: 50% !important;
+    background: radial-gradient(circle at 30% 30%, rgba(255,150,150,0.5), rgba(180,30,60,0.7)) !important;
+    z-index: 1 !important;
+}
 .vd1{width:55px;height:55px;top:15%;right:8%;}
 .vd2{width:38px;height:38px;bottom:15%;right:4%;}
 .vd3{width:25px;height:25px;top:20%;right:28%;}
 
-/* FLOATING PARTICLES - fixed to screen */
-@keyframes rise {
-    0%   { transform: translateY(0) translateX(0px)   rotate(0deg)   scale(1);   opacity:0; }
-    8%   { opacity: 1; }
-    50%  { transform: translateY(-50vh) translateX(25px)  rotate(180deg) scale(0.85); opacity:0.9; }
-    92%  { opacity: 0.7; }
-    100% { transform: translateY(-102vh) translateX(-15px) rotate(360deg) scale(0.4); opacity:0; }
-}
-.pwrap {
-    position: fixed !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    width: 100vw !important;
-    height: 0 !important;
+/* particles live inside the hero which has overflow:visible so they float out upward */
+.fp {
+    position: absolute !important;
+    z-index: 3 !important;
     pointer-events: none !important;
-    z-index: 99999 !important;
+    animation: floatUp linear infinite !important;
 }
-.p {
-    position: fixed !important;
-    bottom: -30px !important;
-    animation: rise linear infinite !important;
-    pointer-events: none !important;
-    z-index: 99999 !important;
-}
-.p01{left:2%;   font-size:16px; animation-duration:7s;  animation-delay:0s;   }
-.p02{left:7%;   font-size:12px; animation-duration:9s;  animation-delay:1.3s; }
-.p03{left:13%;  font-size:20px; animation-duration:6s;  animation-delay:0.5s; }
-.p04{left:19%;  font-size:14px; animation-duration:8s;  animation-delay:2.2s; }
-.p05{left:26%;  font-size:11px; animation-duration:7s;  animation-delay:3.1s; }
-.p06{left:33%;  font-size:18px; animation-duration:10s; animation-delay:0.9s; }
-.p07{left:40%;  font-size:13px; animation-duration:7s;  animation-delay:1.8s; }
-.p08{left:47%;  font-size:16px; animation-duration:8s;  animation-delay:2.6s; }
-.p09{left:54%;  font-size:11px; animation-duration:9s;  animation-delay:0.4s; }
-.p10{left:61%;  font-size:19px; animation-duration:6s;  animation-delay:3.9s; }
-.p11{left:68%;  font-size:14px; animation-duration:7s;  animation-delay:1.1s; }
-.p12{left:75%;  font-size:12px; animation-duration:8s;  animation-delay:3.0s; }
-.p13{left:82%;  font-size:17px; animation-duration:6s;  animation-delay:0.7s; }
-.p14{left:89%;  font-size:15px; animation-duration:9s;  animation-delay:4.3s; }
-.p15{left:95%;  font-size:20px; animation-duration:11s; animation-delay:1.6s; }
-.p16{left:10%;  font-size:13px; animation-duration:8s;  animation-delay:5.1s; }
-.p17{left:35%;  font-size:16px; animation-duration:7s;  animation-delay:2.4s; }
-.p18{left:58%;  font-size:18px; animation-duration:9s;  animation-delay:3.7s; }
-.p19{left:80%;  font-size:11px; animation-duration:6s;  animation-delay:1.9s; }
-.p20{left:50%;  font-size:14px; animation-duration:10s; animation-delay:0.2s; }
+.fp01{bottom:0; left:2%;   font-size:16px; animation-duration:6s;  animation-delay:0s;   }
+.fp02{bottom:0; left:7%;   font-size:12px; animation-duration:8s;  animation-delay:1.4s; }
+.fp03{bottom:0; left:13%;  font-size:20px; animation-duration:7s;  animation-delay:0.6s; }
+.fp04{bottom:0; left:20%;  font-size:14px; animation-duration:9s;  animation-delay:2.3s; }
+.fp05{bottom:0; left:27%;  font-size:11px; animation-duration:6s;  animation-delay:3.2s; }
+.fp06{bottom:0; left:34%;  font-size:18px; animation-duration:10s; animation-delay:1.0s; }
+.fp07{bottom:0; left:41%;  font-size:13px; animation-duration:7s;  animation-delay:1.9s; }
+.fp08{bottom:0; left:48%;  font-size:16px; animation-duration:8s;  animation-delay:2.7s; }
+.fp09{bottom:0; left:55%;  font-size:11px; animation-duration:9s;  animation-delay:0.5s; }
+.fp10{bottom:0; left:62%;  font-size:19px; animation-duration:6s;  animation-delay:4.0s; }
+.fp11{bottom:0; left:69%;  font-size:14px; animation-duration:7s;  animation-delay:1.2s; }
+.fp12{bottom:0; left:76%;  font-size:12px; animation-duration:8s;  animation-delay:3.1s; }
+.fp13{bottom:0; left:83%;  font-size:17px; animation-duration:6s;  animation-delay:0.8s; }
+.fp14{bottom:0; left:90%;  font-size:15px; animation-duration:9s;  animation-delay:4.4s; }
+.fp15{bottom:0; left:96%;  font-size:20px; animation-duration:11s; animation-delay:1.7s; }
 
-.wrap {padding: clamp(20px, 4vw, 40px) clamp(16px, 6vw, 80px) 60px !important; position: relative !important; z-index:1 !important;}
+.wrap {
+    padding: clamp(20px, 4vw, 40px) clamp(16px, 6vw, 80px) 60px !important;
+    position: relative !important;
+    z-index: 1 !important;
+    margin-top: 0 !important;
+}
 .sec-head { display: flex !important; align-items: center !important; gap: 14px !important; margin: 28px 0 14px !important; flex-wrap: wrap !important; }
 .sec-icon { width: 40px !important; height: 40px !important; border-radius: 10px !important; display: flex !important; align-items: center !important; justify-content: center !important; font-size: 1.1rem !important; flex-shrink: 0 !important; }
 .ic-red    { background: linear-gradient(135deg,#9b0030,#c1121f) !important; }
@@ -170,35 +166,25 @@ st.markdown('<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@70
 st.markdown(CSS, unsafe_allow_html=True)
 
 st.markdown("""
-<div class="pwrap">
-  <span class="p p01">❤️</span>
-  <span class="p p02">🌹</span>
-  <span class="p p03">🩷</span>
-  <span class="p p04">🌸</span>
-  <span class="p p05">💗</span>
-  <span class="p p06">🌺</span>
-  <span class="p p07">❤️</span>
-  <span class="p p08">🌷</span>
-  <span class="p p09">🩷</span>
-  <span class="p p10">💐</span>
-  <span class="p p11">🌹</span>
-  <span class="p p12">💗</span>
-  <span class="p p13">❤️</span>
-  <span class="p p14">🌸</span>
-  <span class="p p15">🌺</span>
-  <span class="p p16">💕</span>
-  <span class="p p17">🌷</span>
-  <span class="p p18">🩷</span>
-  <span class="p p19">💐</span>
-  <span class="p p20">❤️</span>
-</div>
-""", unsafe_allow_html=True)
-
-st.markdown("""
 <div class="hero">
   <div class="vdot vd1"></div>
   <div class="vdot vd2"></div>
   <div class="vdot vd3"></div>
+  <span class="fp fp01">❤️</span>
+  <span class="fp fp02">🌹</span>
+  <span class="fp fp03">🩷</span>
+  <span class="fp fp04">🌸</span>
+  <span class="fp fp05">💗</span>
+  <span class="fp fp06">🌺</span>
+  <span class="fp fp07">❤️</span>
+  <span class="fp fp08">🌷</span>
+  <span class="fp fp09">🩷</span>
+  <span class="fp fp10">💐</span>
+  <span class="fp fp11">🌹</span>
+  <span class="fp fp12">💗</span>
+  <span class="fp fp13">❤️</span>
+  <span class="fp fp14">🌸</span>
+  <span class="fp fp15">🌺</span>
   <div style="position:relative;z-index:2;">
     <h1>Heart Disease<br>Prediction</h1>
     <p>Analyzing risk factors to forecast likelihood of<br>developing heart conditions.</p>
@@ -397,14 +383,12 @@ with btn_col:
 if predict:
     selects = [gender, smoking, diabetes, fam_hist, high_bp, low_hdl, high_ldl, exercise, alcohol, stress, sugar]
     nums    = [age, bmi, bp, chol, trig, fbs, crp, homo, sleep]
-
     if any(s == "Select" for s in selects) or any(v == 0 for v in nums):
         st.markdown('<div class="warn">⚠️ <strong>Incomplete form.</strong> Please fill in all fields before predicting.</div>', unsafe_allow_html=True)
     else:
         def enc(col, val):
             try: return int(encoders[col].transform([val])[0])
             except: return 0
-
         inp = {
             'Age': age, 'Gender': enc('Gender', gender), 'BMI': bmi,
             'Sleep_Hours_Per_Day': sleep, 'Blood_Pressure': bp,
@@ -420,57 +404,40 @@ if predict:
             'Stress_Level': enc('Stress_Level', stress),
             'Sugar_Consumption': enc('Sugar_Consumption', sugar),
         }
-        df_in    = pd.DataFrame([inp])[feature_cols]
-        scaled   = scaler.transform(df_in)
-        prob     = float(model.predict_proba(scaled)[0][1])
+        df_in  = pd.DataFrame([inp])[feature_cols]
+        scaled = scaler.transform(df_in)
+        prob   = float(model.predict_proba(scaled)[0][1])
         pred_val = int(model.predict(scaled)[0])
-        pct      = round(prob * 100, 1)
-
+        pct    = round(prob * 100, 1)
         if pred_val == 1:
             level = "🔴 HIGH RISK" if pct >= 70 else "⚡ MEDIUM-HIGH RISK"
             st.markdown(f'<div class="res-high"><span class="r-emoji">🔥</span><p class="r-title">HIGH RISK DETECTED</p><p class="r-pct">{pct}%</p><p class="r-cap">Probability of developing heart disease</p><div class="r-track"><div class="r-fill" style="width:{pct}%"></div></div><span class="r-pill">{level}</span></div>', unsafe_allow_html=True)
         else:
             level = "✔ LOW RISK" if pct < 30 else "⚡ LOW-MEDIUM RISK"
             st.markdown(f'<div class="res-low"><span class="r-emoji">✅</span><p class="r-title">LOW RISK</p><p class="r-pct">{pct}%</p><p class="r-cap">Probability of developing heart disease</p><div class="r-track"><div class="r-fill" style="width:{pct}%"></div></div><span class="r-pill">{level}</span></div>', unsafe_allow_html=True)
-
         suggestions = []
-        if smoking == "Yes":
-            suggestions.append(("red","🚬","Quit Smoking Immediately","Smoking is the #1 modifiable risk factor. Quitting within 1 year halves your heart disease risk."))
-        if bp > 140 or high_bp == "Yes":
-            suggestions.append(("orange","🩸","Lower Your Blood Pressure","Your BP is elevated. Reduce salt intake, avoid caffeine, exercise regularly, and take prescribed medication."))
-        if chol > 240 or high_ldl == "Yes":
-            suggestions.append(("orange","🥑","Improve Your Cholesterol","Cut saturated fats, eat more oats, nuts and olive oil. Ask your doctor about statins if needed."))
-        if bmi > 30:
-            suggestions.append(("red","⚖️","Manage Your Weight","A BMI above 30 significantly strains your heart. Aim to lose 5-10% of body weight through diet and activity."))
-        if exercise == "None":
-            suggestions.append(("blue","🏃","Start Exercising Regularly","Aim for at least 150 minutes of moderate activity per week. Even 30 mins/day reduces heart risk by 35%."))
-        if exercise == "Occasional":
-            suggestions.append(("blue","🏃","Increase Exercise Frequency","Move from occasional to regular exercise. Try to be active 5 days a week."))
-        if stress == "High":
-            suggestions.append(("purple","🧘","Manage Stress Actively","Chronic stress raises cortisol and damages arteries. Practice daily meditation or yoga."))
-        if diabetes == "Yes" or fbs > 126:
-            suggestions.append(("teal","💉","Control Blood Sugar","High blood sugar damages blood vessels. Follow a low-glycaemic diet and take medication as prescribed."))
-        if alcohol == "Heavy":
-            suggestions.append(("orange","🍺","Reduce Alcohol Intake","Heavy drinking weakens the heart muscle. Limit to max 1 drink/day for women and 2 for men."))
-        if sleep < 6:
-            suggestions.append(("blue","😴","Improve Sleep Quality","Less than 6 hours raises heart disease risk. Establish a consistent sleep schedule."))
-        if low_hdl == "Yes":
-            suggestions.append(("green","🥜","Boost Your HDL Cholesterol","Eat more healthy fats (avocado, nuts, olive oil) and exercise regularly."))
-        if trig > 200:
-            suggestions.append(("orange","🐟","Lower Triglycerides","Cut sugar, refined carbs and alcohol. Eat fatty fish twice a week."))
-        if sugar == "High":
-            suggestions.append(("red","🍬","Cut Down on Sugar","High sugar leads to obesity and inflammation. Replace sweets with fruits and whole grains."))
+        if smoking == "Yes": suggestions.append(("red","🚬","Quit Smoking Immediately","Smoking is the #1 modifiable risk factor. Quitting within 1 year halves your heart disease risk."))
+        if bp > 140 or high_bp == "Yes": suggestions.append(("orange","🩸","Lower Your Blood Pressure","Your BP is elevated. Reduce salt intake, avoid caffeine, and exercise regularly."))
+        if chol > 240 or high_ldl == "Yes": suggestions.append(("orange","🥑","Improve Your Cholesterol","Cut saturated fats, eat more oats, nuts and olive oil."))
+        if bmi > 30: suggestions.append(("red","⚖️","Manage Your Weight","A BMI above 30 significantly strains your heart. Aim to lose 5-10% body weight."))
+        if exercise == "None": suggestions.append(("blue","🏃","Start Exercising Regularly","Aim for 150 minutes of moderate activity per week."))
+        if exercise == "Occasional": suggestions.append(("blue","🏃","Increase Exercise Frequency","Try to be active 5 days a week for big heart benefits."))
+        if stress == "High": suggestions.append(("purple","🧘","Manage Stress Actively","Practice daily meditation, deep breathing, or yoga."))
+        if diabetes == "Yes" or fbs > 126: suggestions.append(("teal","💉","Control Blood Sugar","Follow a low-glycaemic diet and take medication as prescribed."))
+        if alcohol == "Heavy": suggestions.append(("orange","🍺","Reduce Alcohol Intake","Limit to max 1 drink/day for women and 2 for men."))
+        if sleep < 6: suggestions.append(("blue","😴","Improve Sleep Quality","Less than 6 hours raises heart disease risk."))
+        if low_hdl == "Yes": suggestions.append(("green","🥜","Boost Your HDL Cholesterol","Eat more healthy fats and exercise regularly."))
+        if trig > 200: suggestions.append(("orange","🐟","Lower Triglycerides","Cut sugar, refined carbs and alcohol."))
+        if sugar == "High": suggestions.append(("red","🍬","Cut Down on Sugar","Replace sweets with fruits and whole grains."))
         if pred_val == 0:
-            suggestions.append(("green","✅","Keep Up the Good Work!","Your results look positive! Maintain healthy habits — exercise, balanced diet and routine check-ups."))
-            suggestions.append(("teal","🏥","Schedule Regular Check-ups","Even with low risk, get a heart health check every 1-2 years."))
-
+            suggestions.append(("green","✅","Keep Up the Good Work!","Maintain healthy habits — exercise, balanced diet and routine check-ups."))
+            suggestions.append(("teal","🏥","Schedule Regular Check-ups","Get a heart health check every 1-2 years."))
         if suggestions:
-            st.markdown('<div class="sec-head"><div class="sec-icon ic-purple">💡</div><div><p class="sec-title">Personalised Health Suggestions</p><p class="sec-sub">Based on your results — steps you can take to improve your heart health</p></div></div><div class="card"><div class="sug-grid">', unsafe_allow_html=True)
+            st.markdown('<div class="sec-head"><div class="sec-icon ic-purple">💡</div><div><p class="sec-title">Personalised Health Suggestions</p><p class="sec-sub">Based on your results</p></div></div><div class="card"><div class="sug-grid">', unsafe_allow_html=True)
             for color, icon, title, text in suggestions:
                 st.markdown(f'<div class="sug-card {color}"><p class="sug-title">{icon} {title}</p><p class="sug-text">{text}</p></div>', unsafe_allow_html=True)
             st.markdown('</div></div>', unsafe_allow_html=True)
-
-        st.markdown('<p style="font-size:0.74rem;color:#9ca3af;text-align:center;margin-top:16px;">⚕️ This tool can help you understand your heart health — but always consult a qualified doctor before making any medical decisions.</p>', unsafe_allow_html=True)
+        st.markdown('<p style="font-size:0.74rem;color:#9ca3af;text-align:center;margin-top:16px;">⚕️ Always consult a qualified doctor before making any medical decisions.</p>', unsafe_allow_html=True)
 
 st.markdown('</div>', unsafe_allow_html=True)
 st.markdown('<div class="foot">❤️ Heart Disease Prediction &nbsp;·&nbsp; Powered by XGBoost &nbsp;·&nbsp; For educational use only</div>', unsafe_allow_html=True)
