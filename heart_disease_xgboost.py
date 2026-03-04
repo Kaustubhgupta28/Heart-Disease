@@ -25,8 +25,6 @@ header {visibility: hidden;}
     padding-right: 0 !important;
     max-width: 100% !important;
 }
-
-/* HERO */
 .hero {
     background: linear-gradient(135deg, #7b0020, #9b0030, #6d001c) !important;
     padding: clamp(30px, 5vw, 60px) clamp(20px, 6vw, 80px) !important;
@@ -56,22 +54,39 @@ header {visibility: hidden;}
     margin: 0 !important;
 }
 .hero-heart {
-    font-size: clamp(4rem, 10vw, 9rem) !important;
-    animation: hb 2s ease-in-out infinite !important;
-    flex-shrink: 0 !important;
-}
-.hero-heart {
     animation: hb 2s ease-in-out infinite !important;
     flex-shrink: 0 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
 }
-
-/* WRAP */
-.wrap { padding: clamp(20px, 4vw, 40px) clamp(16px, 6vw, 80px) 60px !important; }
-
-/* SECTION HEADER */
+@keyframes hb { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
+@keyframes fly {
+    0%   { transform: translateY(0px) translateX(0px) scale(1); opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 0.7; }
+    100% { transform: translateY(-100vh) translateX(30px) scale(0.5); opacity: 0; }
+}
+@keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.3)} }
+.floating-hearts { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; overflow: hidden; }
+.fh { position: absolute; bottom: -50px; animation: fly linear infinite; }
+.fh:nth-child(1)  { left: 5%;  font-size: 0.8rem;  animation-duration: 6s;  animation-delay: 0s; }
+.fh:nth-child(2)  { left: 12%; font-size: 1.4rem;  animation-duration: 8s;  animation-delay: 1s; }
+.fh:nth-child(3)  { left: 20%; font-size: 0.7rem;  animation-duration: 5s;  animation-delay: 2s; }
+.fh:nth-child(4)  { left: 30%; font-size: 1.1rem;  animation-duration: 9s;  animation-delay: 0.5s; }
+.fh:nth-child(5)  { left: 40%; font-size: 0.9rem;  animation-duration: 7s;  animation-delay: 3s; }
+.fh:nth-child(6)  { left: 50%; font-size: 1.3rem;  animation-duration: 6s;  animation-delay: 1.5s; }
+.fh:nth-child(7)  { left: 60%; font-size: 0.75rem; animation-duration: 8s;  animation-delay: 2.5s; }
+.fh:nth-child(8)  { left: 70%; font-size: 1.0rem;  animation-duration: 5s;  animation-delay: 0.8s; }
+.fh:nth-child(9)  { left: 80%; font-size: 1.5rem;  animation-duration: 10s; animation-delay: 1.2s; }
+.fh:nth-child(10) { left: 90%; font-size: 0.85rem; animation-duration: 7s;  animation-delay: 3.5s; }
+.fh:nth-child(11) { left: 25%; font-size: 0.6rem;  animation-duration: 6s;  animation-delay: 4s; }
+.fh:nth-child(12) { left: 75%; font-size: 1.2rem;  animation-duration: 9s;  animation-delay: 2s; }
+.vdot { position: absolute !important; border-radius: 50% !important; background: radial-gradient(circle at 30% 30%, rgba(255,150,150,0.5), rgba(180,30,60,0.7)) !important; }
+.vd1{width:55px;height:55px;top:15%;right:8%;}
+.vd2{width:38px;height:38px;bottom:15%;right:4%;}
+.vd3{width:25px;height:25px;top:20%;right:28%;}
+.wrap {padding: clamp(20px, 4vw, 40px) clamp(16px, 6vw, 80px) 60px !important;}
 .sec-head { display: flex !important; align-items: center !important; gap: 14px !important; margin: 28px 0 14px !important; flex-wrap: wrap !important; }
 .sec-icon { width: 40px !important; height: 40px !important; border-radius: 10px !important; display: flex !important; align-items: center !important; justify-content: center !important; font-size: 1.1rem !important; flex-shrink: 0 !important; }
 .ic-red    { background: linear-gradient(135deg,#9b0030,#c1121f) !important; }
@@ -81,20 +96,12 @@ header {visibility: hidden;}
 .ic-purple { background: linear-gradient(135deg,#7c3aed,#a78bfa) !important; }
 .sec-title { font-family:'Outfit',sans-serif !important; font-size:clamp(0.95rem,2vw,1.1rem) !important; font-weight:700 !important; color:#111 !important; margin:0 !important; }
 .sec-sub   { font-size:0.75rem !important; color:#888 !important; margin:2px 0 0 !important; }
-
-/* CARD */
 .card { background: white !important; border-radius: 16px !important; padding: clamp(16px, 3vw, 28px) !important; border: 1px solid #e5e7eb !important; box-shadow: 0 2px 12px rgba(0,0,0,0.06) !important; margin-bottom: 8px !important; }
-
-/* INPUTS */
 div[data-testid="stNumberInput"] input { background: #f9fafb !important; border: 1.5px solid #e5e7eb !important; border-radius: 10px !important; color: #111 !important; }
 div[data-testid="stSelectbox"] > div > div { background: #f9fafb !important; border: 1.5px solid #e5e7eb !important; border-radius: 10px !important; }
 div[data-testid="stNumberInput"] label, div[data-testid="stSelectbox"] label { font-size: 0.72rem !important; font-weight: 600 !important; color: #666 !important; text-transform: uppercase !important; letter-spacing: 0.04em !important; }
-
-/* BUTTON */
 div[data-testid="stButton"] > button { background: linear-gradient(135deg, #9b0030, #c1121f) !important; color: white !important; border: none !important; border-radius: 14px !important; padding: 16px 40px !important; font-family: 'Outfit', sans-serif !important; font-size: 1rem !important; font-weight: 700 !important; letter-spacing: 0.06em !important; width: 100% !important; box-shadow: 0 4px 20px rgba(155,0,48,0.4) !important; }
 div[data-testid="stButton"] > button:hover { transform: translateY(-2px) !important; }
-
-/* RESULT CARDS */
 .res-high { background: linear-gradient(135deg,#7b0020,#c1121f) !important; border-radius: 20px !important; padding: clamp(24px,4vw,40px) !important; text-align: center !important; color: white !important; box-shadow: 0 12px 40px rgba(155,0,48,0.4) !important; margin: 20px 0 !important; }
 .res-low  { background: linear-gradient(135deg,#14532d,#15803d) !important; border-radius: 20px !important; padding: clamp(24px,4vw,40px) !important; text-align: center !important; color: white !important; box-shadow: 0 12px 40px rgba(21,128,61,0.38) !important; margin: 20px 0 !important; }
 .r-emoji { font-size:clamp(2rem,5vw,3rem); display:block; margin-bottom:10px; }
@@ -104,26 +111,12 @@ div[data-testid="stButton"] > button:hover { transform: translateY(-2px) !import
 .r-track { height:10px; background:rgba(255,255,255,0.15); border-radius:999px; overflow:hidden; margin:18px auto; max-width:360px; }
 .r-fill  { height:100%; border-radius:999px; background:linear-gradient(90deg,rgba(255,255,255,0.4),white); }
 .r-pill  { display:inline-block; border-radius:999px; padding:6px 20px; font-weight:700; font-size:0.78rem; letter-spacing:0.1em; margin-top:14px; background:rgba(255,255,255,0.15); color:white; border:1px solid rgba(255,255,255,0.3); }
-
-/* CAUSES GRID - responsive */
-.causes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 14px;
-    margin-top: 4px;
-}
+.causes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 4px; }
 .cause-card  { background: white; border-radius: 14px; padding: 18px; border: 1px solid #e5e7eb; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
 .cause-icon  { font-size: 1.8rem; margin-bottom: 8px; display: block; }
 .cause-title { font-family:'Outfit',sans-serif; font-size:0.9rem; font-weight:700; color:#1a1a2e; margin-bottom:5px; }
 .cause-desc  { font-size:0.76rem; color:#6b7280; line-height:1.6; }
-
-/* SUGGESTIONS GRID - responsive */
-.sug-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 14px;
-    margin-top: 4px;
-}
+.sug-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 4px; }
 .sug-card  { border-radius: 14px; padding: 16px 18px; border-left: 4px solid; }
 .sug-card.red    { background:#fff5f5; border-color:#e63946; }
 .sug-card.orange { background:#fff7ed; border-color:#f97316; }
@@ -133,7 +126,6 @@ div[data-testid="stButton"] > button:hover { transform: translateY(-2px) !import
 .sug-card.teal   { background:#f0fdfa; border-color:#14b8a6; }
 .sug-title { font-family:'Outfit',sans-serif; font-size:0.88rem; font-weight:700; margin-bottom:5px; color:#1a1a2e; }
 .sug-text  { font-size:0.76rem; color:#4b5563; line-height:1.6; }
-
 .warn { background:#fffbeb; border-left:4px solid #f59e0b; border-radius:10px; padding:14px 18px; font-size:0.85rem; color:#92400e; margin:12px 0; }
 .foot { background:#1a1a2e; color:rgba(255,255,255,0.3); text-align:center; padding:24px; font-size:0.76rem; margin-top:60px; letter-spacing:0.03em; }
 </style>
@@ -152,7 +144,7 @@ st.markdown("""
     <p>Analyzing risk factors to forecast likelihood of<br>developing heart conditions.</p>
   </div>
   <div class="hero-heart">
-    <svg viewBox="0 0 100 90" width="220" height="200" xmlns="http://www.w3.org/2000/svg" style="animation: hb 2s ease-in-out infinite; filter: drop-shadow(0 8px 24px rgba(255,80,80,0.5));">
+    <svg viewBox="0 0 100 90" width="220" height="200" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 8px 24px rgba(255,80,80,0.5));">
       <defs>
         <radialGradient id="hg1" cx="40%" cy="35%" r="60%">
           <stop offset="0%" stop-color="#ff6b8a"/>
@@ -172,26 +164,13 @@ st.markdown("""
           <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
       </defs>
-      <!-- Main heart shape -->
-      <path d="M50 82 C50 82 8 55 8 28 C8 14 19 5 32 5 C40 5 47 9 50 15 C53 9 60 5 68 5 C81 5 92 14 92 28 C92 55 50 82 50 82Z"
-            fill="url(#hg1)" filter="url(#glow)"/>
-      <!-- Shadow layer -->
-      <path d="M50 82 C50 82 8 55 8 28 C8 14 19 5 32 5 C40 5 47 9 50 15 C53 9 60 5 68 5 C81 5 92 14 92 28 C92 55 50 82 50 82Z"
-            fill="url(#hg3)" opacity="0.5"/>
-      <!-- Shine highlight -->
-      <path d="M50 82 C50 82 8 55 8 28 C8 14 19 5 32 5 C40 5 47 9 50 15 C53 9 60 5 68 5 C81 5 92 14 92 28 C92 55 50 82 50 82Z"
-            fill="url(#hg2)"/>
-      <!-- Small gloss bubble -->
+      <path d="M50 82 C50 82 8 55 8 28 C8 14 19 5 32 5 C40 5 47 9 50 15 C53 9 60 5 68 5 C81 5 92 14 92 28 C92 55 50 82 50 82Z" fill="url(#hg1)" filter="url(#glow)"/>
+      <path d="M50 82 C50 82 8 55 8 28 C8 14 19 5 32 5 C40 5 47 9 50 15 C53 9 60 5 68 5 C81 5 92 14 92 28 C92 55 50 82 50 82Z" fill="url(#hg3)" opacity="0.5"/>
+      <path d="M50 82 C50 82 8 55 8 28 C8 14 19 5 32 5 C40 5 47 9 50 15 C53 9 60 5 68 5 C81 5 92 14 92 28 C92 55 50 82 50 82Z" fill="url(#hg2)"/>
       <ellipse cx="34" cy="22" rx="10" ry="7" fill="rgba(255,255,255,0.25)" transform="rotate(-25 34 22)"/>
-      <!-- Aorta tube top -->
-      <path d="M46 14 C46 8 42 3 42 3 L50 3 C54 3 58 5 58 10 L58 16"
-            stroke="#c0002a" stroke-width="5" fill="none" stroke-linecap="round"/>
-      <!-- Pulmonary artery -->
-      <path d="M58 10 C62 6 70 5 74 8"
-            stroke="#3a7bd5" stroke-width="4" fill="none" stroke-linecap="round"/>
-      <path d="M42 3 C36 0 28 2 26 6"
-            stroke="#3a7bd5" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-      <!-- Vein lines for realism -->
+      <path d="M46 14 C46 8 42 3 42 3 L50 3 C54 3 58 5 58 10 L58 16" stroke="#c0002a" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <path d="M58 10 C62 6 70 5 74 8" stroke="#3a7bd5" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M42 3 C36 0 28 2 26 6" stroke="#3a7bd5" stroke-width="3.5" fill="none" stroke-linecap="round"/>
       <path d="M30 35 Q28 45 32 58" stroke="rgba(180,0,40,0.4)" stroke-width="1.5" fill="none"/>
       <path d="M65 32 Q68 44 63 57" stroke="rgba(180,0,40,0.4)" stroke-width="1.5" fill="none"/>
     </svg>
@@ -259,9 +238,24 @@ def load_model():
 
 model, scaler, encoders, feature_cols = load_model()
 
-st.markdown('<div class="wrap">', unsafe_allow_html=True)
+st.markdown("""
+<div class="floating-hearts">
+  <span class="fh">❤️</span>
+  <span class="fh">🩷</span>
+  <span class="fh">❤️</span>
+  <span class="fh">💗</span>
+  <span class="fh">❤️</span>
+  <span class="fh">🩷</span>
+  <span class="fh">💗</span>
+  <span class="fh">❤️</span>
+  <span class="fh">🩷</span>
+  <span class="fh">❤️</span>
+  <span class="fh">💗</span>
+  <span class="fh">🩷</span>
+</div>
+<div class="wrap">
+""", unsafe_allow_html=True)
 
-# ── CAUSES ────────────────────────────────────────────────────────────────────
 st.markdown("""
 <div class="sec-head">
   <div class="sec-icon ic-orange">⚠️</div>
@@ -285,7 +279,6 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# ── PERSONAL ──────────────────────────────────────────────────────────────────
 st.markdown("""
 <div class="sec-head">
   <div class="sec-icon ic-red">👤</div>
@@ -303,7 +296,6 @@ with c3: bmi = st.number_input("BMI", min_value=0.0, max_value=70.0, value=0.0, 
 with c4: sleep = st.number_input("SLEEP HOURS/DAY", min_value=0, max_value=24, value=0)
 st.markdown('</div>', unsafe_allow_html=True)
 
-# ── CLINICAL ──────────────────────────────────────────────────────────────────
 st.markdown("""
 <div class="sec-head">
   <div class="sec-icon ic-blue">🔬</div>
@@ -326,7 +318,6 @@ with c3:
     homo = st.number_input("HOMOCYSTEINE (µmol/L)", min_value=0.0, max_value=100.0, value=0.0, step=0.1)
 st.markdown('</div>', unsafe_allow_html=True)
 
-# ── LIFESTYLE ─────────────────────────────────────────────────────────────────
 st.markdown("""
 <div class="sec-head">
   <div class="sec-icon ic-green">🏃</div>
@@ -359,7 +350,6 @@ _, btn_col, _ = st.columns([1,2,1])
 with btn_col:
     predict = st.button("❤️  ANALYZE HEART DISEASE RISK")
 
-# ── PREDICTION ────────────────────────────────────────────────────────────────
 if predict:
     selects = [gender, smoking, diabetes, fam_hist, high_bp, low_hdl, high_ldl, exercise, alcohol, stress, sugar]
     nums    = [age, bmi, bp, chol, trig, fbs, crp, homo, sleep]
