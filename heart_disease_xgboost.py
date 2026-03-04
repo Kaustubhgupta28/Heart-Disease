@@ -45,6 +45,8 @@ header {visibility: hidden;}
     color: white !important;
     line-height: 1.1 !important;
     margin: 0 0 12px 0 !important;
+    position: relative !important;
+    z-index: 2 !important;
 }
 .hero p {
     font-family: 'Inter', sans-serif !important;
@@ -53,6 +55,8 @@ header {visibility: hidden;}
     font-weight: 300 !important;
     line-height: 1.7 !important;
     margin: 0 !important;
+    position: relative !important;
+    z-index: 2 !important;
 }
 .hero-heart {
     animation: hb 2s ease-in-out infinite !important;
@@ -60,9 +64,39 @@ header {visibility: hidden;}
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    position: relative !important;
+    z-index: 2 !important;
 }
 @keyframes hb { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
-.vdot { position: absolute !important; border-radius: 50% !important; background: radial-gradient(circle at 30% 30%, rgba(255,150,150,0.5), rgba(180,30,60,0.7)) !important; }
+@keyframes floatUp {
+    0%   { bottom:-40px; opacity:0; transform:translateX(0px) rotate(0deg); }
+    10%  { opacity:1; }
+    50%  { transform:translateX(22px) rotate(180deg); }
+    90%  { opacity:0.9; }
+    100% { bottom:110%; opacity:0; transform:translateX(-15px) rotate(360deg); }
+}
+.fp {
+    position: absolute !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
+    bottom: -40px !important;
+}
+.fp1  { left:3%;   font-size:16px; animation: floatUp 6s  linear infinite; animation-delay:0s;   }
+.fp2  { left:9%;   font-size:12px; animation: floatUp 8s  linear infinite; animation-delay:1.2s; }
+.fp3  { left:15%;  font-size:20px; animation: floatUp 7s  linear infinite; animation-delay:0.5s; }
+.fp4  { left:22%;  font-size:14px; animation: floatUp 9s  linear infinite; animation-delay:2.1s; }
+.fp5  { left:30%;  font-size:11px; animation: floatUp 6s  linear infinite; animation-delay:3.0s; }
+.fp6  { left:38%;  font-size:18px; animation: floatUp 10s linear infinite; animation-delay:0.8s; }
+.fp7  { left:46%;  font-size:13px; animation: floatUp 7s  linear infinite; animation-delay:1.7s; }
+.fp8  { left:54%;  font-size:16px; animation: floatUp 8s  linear infinite; animation-delay:2.5s; }
+.fp9  { left:62%;  font-size:11px; animation: floatUp 9s  linear infinite; animation-delay:0.3s; }
+.fp10 { left:70%;  font-size:19px; animation: floatUp 6s  linear infinite; animation-delay:3.8s; }
+.fp11 { left:78%;  font-size:14px; animation: floatUp 7s  linear infinite; animation-delay:1.0s; }
+.fp12 { left:86%;  font-size:12px; animation: floatUp 8s  linear infinite; animation-delay:2.9s; }
+.fp13 { left:93%;  font-size:17px; animation: floatUp 6s  linear infinite; animation-delay:0.6s; }
+.fp14 { left:25%;  font-size:15px; animation: floatUp 9s  linear infinite; animation-delay:4.2s; }
+.fp15 { left:58%;  font-size:20px; animation: floatUp 11s linear infinite; animation-delay:1.5s; }
+.vdot { position: absolute !important; border-radius: 50% !important; background: radial-gradient(circle at 30% 30%, rgba(255,150,150,0.5), rgba(180,30,60,0.7)) !important; z-index:1 !important; }
 .vd1{width:55px;height:55px;top:15%;right:8%;}
 .vd2{width:38px;height:38px;bottom:15%;right:4%;}
 .vd3{width:25px;height:25px;top:20%;right:28%;}
@@ -114,113 +148,27 @@ div[data-testid="stButton"] > button:hover { transform: translateY(-2px) !import
 st.markdown('<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">', unsafe_allow_html=True)
 st.markdown(CSS, unsafe_allow_html=True)
 
-# ── PARTICLES via components.html (guaranteed to work) ────────────────────────
-components.html("""
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-html, body {
-  margin: 0; padding: 0;
-  width: 100%; height: 100%;
-  overflow: hidden;
-  background: transparent;
-}
-canvas {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  pointer-events: none;
-  z-index: 99999;
-}
-</style>
-</head>
-<body>
-<canvas id="c"></canvas>
-<script>
-const canvas = document.getElementById('c');
-const ctx = canvas.getContext('2d');
-canvas.width  = window.innerWidth;
-canvas.height = window.innerHeight;
-
-const EMOJIS = ['❤️','🩷','💗','💕','💖','🌹','🌸','🌺','🌷','💐'];
-const particles = [];
-
-function randomParticle() {
-  return {
-    x: Math.random() * canvas.width,
-    y: canvas.height + 40,
-    emoji: EMOJIS[Math.floor(Math.random() * EMOJIS.length)],
-    size: 14 + Math.random() * 20,
-    speedY: 1.2 + Math.random() * 2,
-    speedX: (Math.random() - 0.5) * 1.2,
-    rotation: Math.random() * 360,
-    rotSpeed: (Math.random() - 0.5) * 3,
-    opacity: 0,
-    life: 0,
-    maxLife: 180 + Math.random() * 120,
-  };
-}
-
-for (let i = 0; i < 20; i++) {
-  const p = randomParticle();
-  p.y = Math.random() * canvas.height;
-  p.life = Math.floor(Math.random() * p.maxLife);
-  particles.push(p);
-}
-
-function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  if (particles.length < 25) particles.push(randomParticle());
-
-  for (let i = particles.length - 1; i >= 0; i--) {
-    const p = particles[i];
-    p.y     -= p.speedY;
-    p.x     += p.speedX;
-    p.rotation += p.rotSpeed;
-    p.life++;
-
-    const half = p.maxLife / 2;
-    p.opacity = p.life < 20
-      ? p.life / 20
-      : p.life > p.maxLife - 20
-        ? (p.maxLife - p.life) / 20
-        : 1;
-
-    ctx.save();
-    ctx.globalAlpha = p.opacity * 0.85;
-    ctx.translate(p.x, p.y);
-    ctx.rotate((p.rotation * Math.PI) / 180);
-    ctx.font = p.size + 'px serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(p.emoji, 0, 0);
-    ctx.restore();
-
-    if (p.life >= p.maxLife || p.y < -60) {
-      particles.splice(i, 1);
-    }
-  }
-  requestAnimationFrame(draw);
-}
-
-draw();
-
-window.addEventListener('resize', () => {
-  canvas.width  = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
-</script>
-</body>
-</html>
-""", height=0, scrolling=False)
-
 st.markdown("""
 <div class="hero">
   <div class="vdot vd1"></div>
   <div class="vdot vd2"></div>
   <div class="vdot vd3"></div>
-  <div>
+  <span class="fp fp1">❤️</span>
+  <span class="fp fp2">🌹</span>
+  <span class="fp fp3">🩷</span>
+  <span class="fp fp4">🌸</span>
+  <span class="fp fp5">💗</span>
+  <span class="fp fp6">🌺</span>
+  <span class="fp fp7">❤️</span>
+  <span class="fp fp8">🌷</span>
+  <span class="fp fp9">🩷</span>
+  <span class="fp fp10">💐</span>
+  <span class="fp fp11">🌹</span>
+  <span class="fp fp12">💗</span>
+  <span class="fp fp13">❤️</span>
+  <span class="fp fp14">🌸</span>
+  <span class="fp fp15">🌺</span>
+  <div style="position:relative;z-index:2;">
     <h1>Heart Disease<br>Prediction</h1>
     <p>Analyzing risk factors to forecast likelihood of<br>developing heart conditions.</p>
   </div>
