@@ -60,11 +60,13 @@ header {visibility: hidden;}
     animation: hb 2s ease-in-out infinite !important;
     flex-shrink: 0 !important;
 }
-@keyframes hb { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
-.vdot { position: absolute !important; border-radius: 50% !important; background: radial-gradient(circle at 30% 30%, rgba(255,150,150,0.5), rgba(180,30,60,0.7)) !important; }
-.vd1{width:55px;height:55px;top:15%;right:8%;}
-.vd2{width:38px;height:38px;bottom:15%;right:4%;}
-.vd3{width:25px;height:25px;top:20%;right:28%;}
+.hero-heart {
+    animation: hb 2s ease-in-out infinite !important;
+    flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
 
 /* WRAP */
 .wrap { padding: clamp(20px, 4vw, 40px) clamp(16px, 6vw, 80px) 60px !important; }
@@ -149,7 +151,51 @@ st.markdown("""
     <h1>Heart Disease<br>Prediction</h1>
     <p>Analyzing risk factors to forecast likelihood of<br>developing heart conditions.</p>
   </div>
-  <div class="hero-heart">🫀</div>
+  <div class="hero-heart">
+    <svg viewBox="0 0 100 90" width="160" height="140" xmlns="http://www.w3.org/2000/svg" style="animation: hb 2s ease-in-out infinite; filter: drop-shadow(0 8px 24px rgba(255,80,80,0.5));">
+      <defs>
+        <radialGradient id="hg1" cx="40%" cy="35%" r="60%">
+          <stop offset="0%" stop-color="#ff6b8a"/>
+          <stop offset="40%" stop-color="#e8174a"/>
+          <stop offset="100%" stop-color="#8b0000"/>
+        </radialGradient>
+        <radialGradient id="hg2" cx="30%" cy="30%" r="40%">
+          <stop offset="0%" stop-color="rgba(255,255,255,0.6)"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+        </radialGradient>
+        <radialGradient id="hg3" cx="70%" cy="70%" r="40%">
+          <stop offset="0%" stop-color="#6b0000"/>
+          <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+        </radialGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="2.5" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <!-- Main heart shape -->
+      <path d="M50 82 C50 82 8 55 8 28 C8 14 19 5 32 5 C40 5 47 9 50 15 C53 9 60 5 68 5 C81 5 92 14 92 28 C92 55 50 82 50 82Z"
+            fill="url(#hg1)" filter="url(#glow)"/>
+      <!-- Shadow layer -->
+      <path d="M50 82 C50 82 8 55 8 28 C8 14 19 5 32 5 C40 5 47 9 50 15 C53 9 60 5 68 5 C81 5 92 14 92 28 C92 55 50 82 50 82Z"
+            fill="url(#hg3)" opacity="0.5"/>
+      <!-- Shine highlight -->
+      <path d="M50 82 C50 82 8 55 8 28 C8 14 19 5 32 5 C40 5 47 9 50 15 C53 9 60 5 68 5 C81 5 92 14 92 28 C92 55 50 82 50 82Z"
+            fill="url(#hg2)"/>
+      <!-- Small gloss bubble -->
+      <ellipse cx="34" cy="22" rx="10" ry="7" fill="rgba(255,255,255,0.25)" transform="rotate(-25 34 22)"/>
+      <!-- Aorta tube top -->
+      <path d="M46 14 C46 8 42 3 42 3 L50 3 C54 3 58 5 58 10 L58 16"
+            stroke="#c0002a" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <!-- Pulmonary artery -->
+      <path d="M58 10 C62 6 70 5 74 8"
+            stroke="#3a7bd5" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M42 3 C36 0 28 2 26 6"
+            stroke="#3a7bd5" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <!-- Vein lines for realism -->
+      <path d="M30 35 Q28 45 32 58" stroke="rgba(180,0,40,0.4)" stroke-width="1.5" fill="none"/>
+      <path d="M65 32 Q68 44 63 57" stroke="rgba(180,0,40,0.4)" stroke-width="1.5" fill="none"/>
+    </svg>
+  </div>
 </div>
 """, unsafe_allow_html=True)
 
