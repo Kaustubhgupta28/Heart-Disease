@@ -1,5 +1,4 @@
 import streamlit as st
-import streamlit.components.v1 as components
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import LabelEncoder, StandardScaler
@@ -34,7 +33,6 @@ header {visibility: hidden;}
     justify-content: space-between !important;
     min-height: clamp(200px, 30vw, 300px) !important;
     position: relative !important;
-    overflow: hidden !important;
     flex-wrap: wrap !important;
     gap: 20px !important;
 }
@@ -68,39 +66,59 @@ header {visibility: hidden;}
     z-index: 2 !important;
 }
 @keyframes hb { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
-@keyframes floatUp {
-    0%   { bottom:-40px; opacity:0; transform:translateX(0px) rotate(0deg); }
-    10%  { opacity:1; }
-    50%  { transform:translateX(22px) rotate(180deg); }
-    90%  { opacity:0.9; }
-    100% { bottom:110%; opacity:0; transform:translateX(-15px) rotate(360deg); }
-}
-.fp {
-    position: absolute !important;
-    z-index: 1 !important;
-    pointer-events: none !important;
-    bottom: -40px !important;
-}
-.fp1  { left:3%;   font-size:16px; animation: floatUp 6s  linear infinite; animation-delay:0s;   }
-.fp2  { left:9%;   font-size:12px; animation: floatUp 8s  linear infinite; animation-delay:1.2s; }
-.fp3  { left:15%;  font-size:20px; animation: floatUp 7s  linear infinite; animation-delay:0.5s; }
-.fp4  { left:22%;  font-size:14px; animation: floatUp 9s  linear infinite; animation-delay:2.1s; }
-.fp5  { left:30%;  font-size:11px; animation: floatUp 6s  linear infinite; animation-delay:3.0s; }
-.fp6  { left:38%;  font-size:18px; animation: floatUp 10s linear infinite; animation-delay:0.8s; }
-.fp7  { left:46%;  font-size:13px; animation: floatUp 7s  linear infinite; animation-delay:1.7s; }
-.fp8  { left:54%;  font-size:16px; animation: floatUp 8s  linear infinite; animation-delay:2.5s; }
-.fp9  { left:62%;  font-size:11px; animation: floatUp 9s  linear infinite; animation-delay:0.3s; }
-.fp10 { left:70%;  font-size:19px; animation: floatUp 6s  linear infinite; animation-delay:3.8s; }
-.fp11 { left:78%;  font-size:14px; animation: floatUp 7s  linear infinite; animation-delay:1.0s; }
-.fp12 { left:86%;  font-size:12px; animation: floatUp 8s  linear infinite; animation-delay:2.9s; }
-.fp13 { left:93%;  font-size:17px; animation: floatUp 6s  linear infinite; animation-delay:0.6s; }
-.fp14 { left:25%;  font-size:15px; animation: floatUp 9s  linear infinite; animation-delay:4.2s; }
-.fp15 { left:58%;  font-size:20px; animation: floatUp 11s linear infinite; animation-delay:1.5s; }
 .vdot { position: absolute !important; border-radius: 50% !important; background: radial-gradient(circle at 30% 30%, rgba(255,150,150,0.5), rgba(180,30,60,0.7)) !important; z-index:1 !important; }
 .vd1{width:55px;height:55px;top:15%;right:8%;}
 .vd2{width:38px;height:38px;bottom:15%;right:4%;}
 .vd3{width:25px;height:25px;top:20%;right:28%;}
-.wrap {padding: clamp(20px, 4vw, 40px) clamp(16px, 6vw, 80px) 60px !important; position: relative !important;}
+
+/* PAGE WRAPPER for particles */
+.page-wrap {
+    position: relative !important;
+    overflow: hidden !important;
+    min-height: 100vh !important;
+}
+
+/* FLOATING PARTICLES */
+@keyframes rise {
+    0%   { transform: translateY(0vh) translateX(0px) rotate(0deg) scale(1); opacity:0; }
+    8%   { opacity: 1; }
+    50%  { transform: translateY(-50vh) translateX(30px) rotate(180deg) scale(0.8); opacity:0.9; }
+    92%  { opacity: 0.6; }
+    100% { transform: translateY(-105vh) translateX(-20px) rotate(360deg) scale(0.4); opacity:0; }
+}
+.pwrap {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    pointer-events: none !important;
+    z-index: 0 !important;
+    overflow: hidden !important;
+}
+.p { position: absolute !important; animation: rise linear infinite !important; }
+.p01{left:2%;   top:95%; font-size:16px; animation-duration:7s;  animation-delay:0s;   }
+.p02{left:7%;   top:90%; font-size:12px; animation-duration:9s;  animation-delay:1.3s; }
+.p03{left:13%;  top:98%; font-size:20px; animation-duration:6s;  animation-delay:0.5s; }
+.p04{left:19%;  top:92%; font-size:14px; animation-duration:8s;  animation-delay:2.2s; }
+.p05{left:26%;  top:96%; font-size:11px; animation-duration:7s;  animation-delay:3.1s; }
+.p06{left:33%;  top:89%; font-size:18px; animation-duration:10s; animation-delay:0.9s; }
+.p07{left:40%;  top:94%; font-size:13px; animation-duration:7s;  animation-delay:1.8s; }
+.p08{left:47%;  top:97%; font-size:16px; animation-duration:8s;  animation-delay:2.6s; }
+.p09{left:54%;  top:91%; font-size:11px; animation-duration:9s;  animation-delay:0.4s; }
+.p10{left:61%;  top:95%; font-size:19px; animation-duration:6s;  animation-delay:3.9s; }
+.p11{left:68%;  top:88%; font-size:14px; animation-duration:7s;  animation-delay:1.1s; }
+.p12{left:75%;  top:93%; font-size:12px; animation-duration:8s;  animation-delay:3.0s; }
+.p13{left:82%;  top:96%; font-size:17px; animation-duration:6s;  animation-delay:0.7s; }
+.p14{left:89%;  top:90%; font-size:15px; animation-duration:9s;  animation-delay:4.3s; }
+.p15{left:95%;  top:97%; font-size:20px; animation-duration:11s; animation-delay:1.6s; }
+.p16{left:10%;  top:60%; font-size:13px; animation-duration:8s;  animation-delay:5.1s; }
+.p17{left:35%;  top:70%; font-size:16px; animation-duration:7s;  animation-delay:2.4s; }
+.p18{left:58%;  top:55%; font-size:18px; animation-duration:9s;  animation-delay:3.7s; }
+.p19{left:80%;  top:65%; font-size:11px; animation-duration:6s;  animation-delay:1.9s; }
+.p20{left:50%;  top:80%; font-size:14px; animation-duration:10s; animation-delay:0.2s; }
+
+.wrap {padding: clamp(20px, 4vw, 40px) clamp(16px, 6vw, 80px) 60px !important; position: relative !important; z-index:1 !important;}
 .sec-head { display: flex !important; align-items: center !important; gap: 14px !important; margin: 28px 0 14px !important; flex-wrap: wrap !important; }
 .sec-icon { width: 40px !important; height: 40px !important; border-radius: 10px !important; display: flex !important; align-items: center !important; justify-content: center !important; font-size: 1.1rem !important; flex-shrink: 0 !important; }
 .ic-red    { background: linear-gradient(135deg,#9b0030,#c1121f) !important; }
@@ -149,25 +167,36 @@ st.markdown('<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@70
 st.markdown(CSS, unsafe_allow_html=True)
 
 st.markdown("""
+<div class="page-wrap">
+<div class="pwrap">
+  <span class="p p01">❤️</span>
+  <span class="p p02">🌹</span>
+  <span class="p p03">🩷</span>
+  <span class="p p04">🌸</span>
+  <span class="p p05">💗</span>
+  <span class="p p06">🌺</span>
+  <span class="p p07">❤️</span>
+  <span class="p p08">🌷</span>
+  <span class="p p09">🩷</span>
+  <span class="p p10">💐</span>
+  <span class="p p11">🌹</span>
+  <span class="p p12">💗</span>
+  <span class="p p13">❤️</span>
+  <span class="p p14">🌸</span>
+  <span class="p p15">🌺</span>
+  <span class="p p16">💕</span>
+  <span class="p p17">🌷</span>
+  <span class="p p18">🩷</span>
+  <span class="p p19">💐</span>
+  <span class="p p20">❤️</span>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("""
 <div class="hero">
   <div class="vdot vd1"></div>
   <div class="vdot vd2"></div>
   <div class="vdot vd3"></div>
-  <span class="fp fp1">❤️</span>
-  <span class="fp fp2">🌹</span>
-  <span class="fp fp3">🩷</span>
-  <span class="fp fp4">🌸</span>
-  <span class="fp fp5">💗</span>
-  <span class="fp fp6">🌺</span>
-  <span class="fp fp7">❤️</span>
-  <span class="fp fp8">🌷</span>
-  <span class="fp fp9">🩷</span>
-  <span class="fp fp10">💐</span>
-  <span class="fp fp11">🌹</span>
-  <span class="fp fp12">💗</span>
-  <span class="fp fp13">❤️</span>
-  <span class="fp fp14">🌸</span>
-  <span class="fp fp15">🌺</span>
   <div style="position:relative;z-index:2;">
     <h1>Heart Disease<br>Prediction</h1>
     <p>Analyzing risk factors to forecast likelihood of<br>developing heart conditions.</p>
@@ -441,5 +470,5 @@ if predict:
 
         st.markdown('<p style="font-size:0.74rem;color:#9ca3af;text-align:center;margin-top:16px;">⚕️ This tool can help you understand your heart health — but always consult a qualified doctor before making any medical decisions.</p>', unsafe_allow_html=True)
 
-st.markdown('</div>', unsafe_allow_html=True)
+st.markdown('</div></div>', unsafe_allow_html=True)
 st.markdown('<div class="foot">❤️ Heart Disease Prediction &nbsp;·&nbsp; Powered by XGBoost &nbsp;·&nbsp; For educational use only</div>', unsafe_allow_html=True)
