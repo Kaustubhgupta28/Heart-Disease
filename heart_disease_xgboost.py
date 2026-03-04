@@ -152,7 +152,7 @@ st.markdown("""
     <p>Analyzing risk factors to forecast likelihood of<br>developing heart conditions.</p>
   </div>
   <div class="hero-heart">
-    <svg viewBox="0 0 100 90" width="160" height="140" xmlns="http://www.w3.org/2000/svg" style="animation: hb 2s ease-in-out infinite; filter: drop-shadow(0 8px 24px rgba(255,80,80,0.5));">
+    <svg viewBox="0 0 100 90" width="220" height="200" xmlns="http://www.w3.org/2000/svg" style="animation: hb 2s ease-in-out infinite; filter: drop-shadow(0 8px 24px rgba(255,80,80,0.5));">
       <defs>
         <radialGradient id="hg1" cx="40%" cy="35%" r="60%">
           <stop offset="0%" stop-color="#ff6b8a"/>
