@@ -360,5 +360,3 @@ if predict:
 
 st.markdown('</div>', unsafe_allow_html=True)
 st.markdown('<div class="foot">❤️ Heart Disease Prediction &nbsp;·&nbsp; Powered by XGBoost &nbsp;·&nbsp; For educational use only</div>', unsafe_allow_html=True)
-
-what new can u do in this 
