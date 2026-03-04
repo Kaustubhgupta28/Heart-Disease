@@ -5,6 +5,7 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.model_selection import train_test_split
 import xgboost as xgb
 import warnings
+import streamlit.components.v1 as components
 warnings.filterwarnings('ignore')
 
 st.set_page_config(page_title="Heart Disease Prediction", page_icon="❤️", layout="wide", initial_sidebar_state="collapsed")
@@ -153,7 +154,43 @@ div[data-testid="stButton"] > button:hover { transform: translateY(-2px) !import
 
 st.markdown('<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">', unsafe_allow_html=True)
 st.markdown(CSS, unsafe_allow_html=True)
-st.markdown(PARTICLES_IFRAME, unsafe_allow_html=True)
+components.html("""
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+* { margin:0; padding:0; }
+body { background:transparent; overflow:hidden; }
+.p { position:fixed; bottom:-60px; pointer-events:none; z-index:999999; }
+@keyframes rise {
+  0%   { transform:translateY(0) rotate(0deg) scale(1); opacity:0; }
+  10%  { opacity:1; }
+  85%  { opacity:0.9; }
+  100% { transform:translateY(-105vh) rotate(360deg) scale(0.3); opacity:0; }
+}
+</style>
+</head>
+<body>
+<script>
+const emojis = ["❤️","🩷","💗","💕","💖","🌹","🌸","🌺","🌷","💐"];
+function spawn() {
+  const el = document.createElement("div");
+  el.className = "p";
+  el.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+  el.style.left = (Math.random()*100) + "vw";
+  el.style.fontSize = (14 + Math.random()*20) + "px";
+  const dur = 5 + Math.random()*7;
+  el.style.animation = "rise " + dur + "s linear forwards";
+  el.style.animationDelay = (Math.random()*1) + "s";
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), (dur+2)*1000);
+  setTimeout(spawn, 300 + Math.random()*500);
+}
+for(let i=0;i<12;i++) setTimeout(spawn, i*300);
+</script>
+</body>
+</html>
+""", height=0)
 
 st.markdown("""
 <div class="hero">
