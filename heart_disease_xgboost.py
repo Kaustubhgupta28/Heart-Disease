@@ -9,6 +9,47 @@ warnings.filterwarnings('ignore')
 
 st.set_page_config(page_title="Heart Disease Prediction", page_icon="❤️", layout="wide", initial_sidebar_state="collapsed")
 
+# Inject particles via iframe - this ALWAYS works in Streamlit
+PARTICLES_IFRAME = """
+<iframe srcdoc='
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+* { margin:0; padding:0; overflow:hidden; }
+body { background:transparent; width:100vw; height:100vh; }
+.p { position:fixed; bottom:-60px; font-size:20px; pointer-events:none; animation:rise linear infinite; }
+@keyframes rise {
+  0%   { transform:translateY(0) rotate(0deg) scale(1);   opacity:0; }
+  10%  { opacity:1; }
+  85%  { opacity:0.8; }
+  100% { transform:translateY(-105vh) rotate(360deg) scale(0.4); opacity:0; }
+}
+</style>
+</head>
+<body>
+<script>
+const emojis = ["❤️","🩷","💗","💕","🌹","🌸","🌺","🌷","💐"];
+function spawn() {
+  const el = document.createElement("div");
+  el.className = "p";
+  el.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+  el.style.left = (Math.random()*100) + "vw";
+  el.style.fontSize = (12 + Math.random()*18) + "px";
+  const dur = 4 + Math.random()*7;
+  el.style.animationDuration = dur + "s";
+  el.style.animationDelay = (Math.random()*2) + "s";
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), (dur+2)*1000);
+}
+setInterval(spawn, 350);
+for(let i=0;i<15;i++) setTimeout(spawn, i*200);
+</script>
+</body>
+</html>
+' style="position:fixed;top:0;left:0;width:100%;height:100%;border:none;pointer-events:none;z-index:99999;background:transparent;" allowtransparency="true"></iframe>
+"""
+
 CSS = """
 <style>
 #MainMenu {visibility: hidden;}
@@ -110,76 +151,9 @@ div[data-testid="stButton"] > button:hover { transform: translateY(-2px) !import
 </style>
 """
 
-PARTICLES_JS = """
-<script>
-(function() {
-  const items = [
-    { t: '❤️',  size: 18 },
-    { t: '🩷',  size: 16 },
-    { t: '💗',  size: 14 },
-    { t: '🌹',  size: 20 },
-    { t: '🌸',  size: 18 },
-    { t: '🌺',  size: 16 },
-  ];
-
-  function spawnParticle() {
-    const pick = items[Math.floor(Math.random() * items.length)];
-    const el   = document.createElement('div');
-    const size = pick.size + Math.random() * 10;
-    const left = Math.random() * 100;
-    const dur  = 5 + Math.random() * 8;
-    const drift= (Math.random() - 0.5) * 120;
-
-    el.innerText = pick.t;
-    el.style.cssText = [
-      'position:fixed',
-      'bottom:-60px',
-      'left:' + left + 'vw',
-      'font-size:' + size + 'px',
-      'pointer-events:none',
-      'z-index:99999',
-      'opacity:0',
-      'transition:none',
-      'user-select:none',
-    ].join(';');
-
-    document.body.appendChild(el);
-
-    const start = performance.now();
-    function animate(now) {
-      const elapsed = (now - start) / 1000;
-      const progress = elapsed / dur;
-      if (progress >= 1) { el.remove(); return; }
-      const y   = -window.innerHeight * progress - 60;
-      const x   = drift * Math.sin(progress * Math.PI * 2);
-      const rot = progress * 360;
-      const scale = 0.6 + Math.sin(progress * Math.PI) * 0.6;
-      let opacity = 1;
-      if (progress < 0.1) opacity = progress / 0.1;
-      else if (progress > 0.8) opacity = (1 - progress) / 0.2;
-      el.style.transform = 'translateY(' + y + 'px) translateX(' + x + 'px) rotate(' + rot + 'deg) scale(' + scale + ')';
-      el.style.opacity = opacity;
-      requestAnimationFrame(animate);
-    }
-    requestAnimationFrame(animate);
-    setTimeout(spawnParticle, 300 + Math.random() * 600);
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', spawnParticle);
-  } else {
-    spawnParticle();
-  }
-  for (let i = 0; i < 8; i++) {
-    setTimeout(spawnParticle, i * 400);
-  }
-})();
-</script>
-"""
-
 st.markdown('<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">', unsafe_allow_html=True)
 st.markdown(CSS, unsafe_allow_html=True)
-st.markdown(PARTICLES_JS, unsafe_allow_html=True)
+st.markdown(PARTICLES_IFRAME, unsafe_allow_html=True)
 
 st.markdown("""
 <div class="hero">
@@ -422,34 +396,34 @@ if predict:
 
         suggestions = []
         if smoking == "Yes":
-            suggestions.append(("red","🚬","Quit Smoking Immediately","Smoking is the #1 modifiable risk factor. Quitting within 1 year halves your heart disease risk. Seek nicotine replacement therapy or consult your doctor."))
+            suggestions.append(("red","🚬","Quit Smoking Immediately","Smoking is the #1 modifiable risk factor. Quitting within 1 year halves your heart disease risk."))
         if bp > 140 or high_bp == "Yes":
-            suggestions.append(("orange","🩸","Lower Your Blood Pressure","Your BP is elevated. Reduce salt intake, avoid caffeine, exercise regularly, and take prescribed medication consistently."))
+            suggestions.append(("orange","🩸","Lower Your Blood Pressure","Your BP is elevated. Reduce salt intake, avoid caffeine, exercise regularly, and take prescribed medication."))
         if chol > 240 or high_ldl == "Yes":
             suggestions.append(("orange","🥑","Improve Your Cholesterol","Cut saturated fats, eat more oats, nuts and olive oil. Ask your doctor about statins if needed."))
         if bmi > 30:
-            suggestions.append(("red","⚖️","Manage Your Weight","A BMI above 30 significantly strains your heart. Aim to lose 5-10% of body weight through a calorie-controlled diet and daily activity."))
+            suggestions.append(("red","⚖️","Manage Your Weight","A BMI above 30 significantly strains your heart. Aim to lose 5-10% of body weight through diet and activity."))
         if exercise == "None":
             suggestions.append(("blue","🏃","Start Exercising Regularly","Aim for at least 150 minutes of moderate activity per week. Even 30 mins/day reduces heart risk by 35%."))
         if exercise == "Occasional":
-            suggestions.append(("blue","🏃","Increase Exercise Frequency","Move from occasional to regular exercise. Try to be active 5 days a week for big heart benefits."))
+            suggestions.append(("blue","🏃","Increase Exercise Frequency","Move from occasional to regular exercise. Try to be active 5 days a week."))
         if stress == "High":
-            suggestions.append(("purple","🧘","Manage Stress Actively","Chronic stress raises cortisol and damages arteries. Practice daily meditation, deep breathing, or yoga."))
+            suggestions.append(("purple","🧘","Manage Stress Actively","Chronic stress raises cortisol and damages arteries. Practice daily meditation or yoga."))
         if diabetes == "Yes" or fbs > 126:
             suggestions.append(("teal","💉","Control Blood Sugar","High blood sugar damages blood vessels. Follow a low-glycaemic diet and take medication as prescribed."))
         if alcohol == "Heavy":
             suggestions.append(("orange","🍺","Reduce Alcohol Intake","Heavy drinking weakens the heart muscle. Limit to max 1 drink/day for women and 2 for men."))
         if sleep < 6:
-            suggestions.append(("blue","😴","Improve Sleep Quality","Less than 6 hours raises heart disease risk. Establish a consistent sleep schedule and avoid screens before bed."))
+            suggestions.append(("blue","😴","Improve Sleep Quality","Less than 6 hours raises heart disease risk. Establish a consistent sleep schedule."))
         if low_hdl == "Yes":
-            suggestions.append(("green","🥜","Boost Your HDL Cholesterol","Eat more healthy fats (avocado, nuts, olive oil), exercise regularly, and quit smoking."))
+            suggestions.append(("green","🥜","Boost Your HDL Cholesterol","Eat more healthy fats (avocado, nuts, olive oil) and exercise regularly."))
         if trig > 200:
-            suggestions.append(("orange","🐟","Lower Triglycerides","Cut sugar, refined carbs and alcohol. Eat fatty fish twice a week and increase physical activity."))
+            suggestions.append(("orange","🐟","Lower Triglycerides","Cut sugar, refined carbs and alcohol. Eat fatty fish twice a week."))
         if sugar == "High":
-            suggestions.append(("red","🍬","Cut Down on Sugar","High sugar leads to obesity, diabetes and inflammation. Replace sweets with fruits and whole grains."))
+            suggestions.append(("red","🍬","Cut Down on Sugar","High sugar leads to obesity and inflammation. Replace sweets with fruits and whole grains."))
         if pred_val == 0:
-            suggestions.append(("green","✅","Keep Up the Good Work!","Your results look positive! Maintain healthy habits — regular exercise, balanced diet and routine check-ups will keep your heart strong."))
-            suggestions.append(("teal","🏥","Schedule Regular Check-ups","Even with low risk, get a heart health check every 1-2 years. Early detection is the best protection."))
+            suggestions.append(("green","✅","Keep Up the Good Work!","Your results look positive! Maintain healthy habits — exercise, balanced diet and routine check-ups."))
+            suggestions.append(("teal","🏥","Schedule Regular Check-ups","Even with low risk, get a heart health check every 1-2 years."))
 
         if suggestions:
             st.markdown('<div class="sec-head"><div class="sec-icon ic-purple">💡</div><div><p class="sec-title">Personalised Health Suggestions</p><p class="sec-sub">Based on your results — steps you can take to improve your heart health</p></div></div><div class="card"><div class="sug-grid">', unsafe_allow_html=True)
