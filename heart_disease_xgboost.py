@@ -25,78 +25,113 @@ header {visibility: hidden;}
     padding-right: 0 !important;
     max-width: 100% !important;
 }
+
+/* HERO */
 .hero {
     background: linear-gradient(135deg, #7b0020, #9b0030, #6d001c) !important;
-    padding: 60px 80px !important;
+    padding: clamp(30px, 5vw, 60px) clamp(20px, 6vw, 80px) !important;
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
-    min-height: 300px !important;
+    min-height: clamp(200px, 30vw, 300px) !important;
     position: relative !important;
     overflow: hidden !important;
+    flex-wrap: wrap !important;
+    gap: 20px !important;
 }
 .hero h1 {
     font-family: 'Outfit', sans-serif !important;
-    font-size: 3.5rem !important;
+    font-size: clamp(2rem, 5vw, 3.5rem) !important;
     font-weight: 900 !important;
     color: white !important;
     line-height: 1.1 !important;
-    margin: 0 0 16px 0 !important;
+    margin: 0 0 12px 0 !important;
 }
 .hero p {
     font-family: 'Inter', sans-serif !important;
     color: rgba(255,255,255,0.6) !important;
-    font-size: 1rem !important;
+    font-size: clamp(0.8rem, 1.5vw, 1rem) !important;
     font-weight: 300 !important;
     line-height: 1.7 !important;
     margin: 0 !important;
 }
-.hero-heart { font-size: 9rem !important; animation: hb 2s ease-in-out infinite !important; }
+.hero-heart {
+    font-size: clamp(4rem, 10vw, 9rem) !important;
+    animation: hb 2s ease-in-out infinite !important;
+    flex-shrink: 0 !important;
+}
 @keyframes hb { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
 .vdot { position: absolute !important; border-radius: 50% !important; background: radial-gradient(circle at 30% 30%, rgba(255,150,150,0.5), rgba(180,30,60,0.7)) !important; }
 .vd1{width:55px;height:55px;top:15%;right:8%;}
 .vd2{width:38px;height:38px;bottom:15%;right:4%;}
 .vd3{width:25px;height:25px;top:20%;right:28%;}
-.wrap {padding: 40px 80px 60px !important;}
-.sec-head { display: flex !important; align-items: center !important; gap: 14px !important; margin: 32px 0 16px !important; }
+
+/* WRAP */
+.wrap { padding: clamp(20px, 4vw, 40px) clamp(16px, 6vw, 80px) 60px !important; }
+
+/* SECTION HEADER */
+.sec-head { display: flex !important; align-items: center !important; gap: 14px !important; margin: 28px 0 14px !important; flex-wrap: wrap !important; }
 .sec-icon { width: 40px !important; height: 40px !important; border-radius: 10px !important; display: flex !important; align-items: center !important; justify-content: center !important; font-size: 1.1rem !important; flex-shrink: 0 !important; }
 .ic-red    { background: linear-gradient(135deg,#9b0030,#c1121f) !important; }
 .ic-blue   { background: linear-gradient(135deg,#1d4ed8,#3b82f6) !important; }
 .ic-green  { background: linear-gradient(135deg,#15803d,#22c55e) !important; }
 .ic-orange { background: linear-gradient(135deg,#c2410c,#f97316) !important; }
 .ic-purple { background: linear-gradient(135deg,#7c3aed,#a78bfa) !important; }
-.sec-title { font-family:'Outfit',sans-serif !important; font-size:1.1rem !important; font-weight:700 !important; color:#111 !important; margin:0 !important; }
+.sec-title { font-family:'Outfit',sans-serif !important; font-size:clamp(0.95rem,2vw,1.1rem) !important; font-weight:700 !important; color:#111 !important; margin:0 !important; }
 .sec-sub   { font-size:0.75rem !important; color:#888 !important; margin:2px 0 0 !important; }
-.card { background: white !important; border-radius: 16px !important; padding: 28px !important; border: 1px solid #e5e7eb !important; box-shadow: 0 2px 12px rgba(0,0,0,0.06) !important; margin-bottom: 8px !important; }
+
+/* CARD */
+.card { background: white !important; border-radius: 16px !important; padding: clamp(16px, 3vw, 28px) !important; border: 1px solid #e5e7eb !important; box-shadow: 0 2px 12px rgba(0,0,0,0.06) !important; margin-bottom: 8px !important; }
+
+/* INPUTS */
 div[data-testid="stNumberInput"] input { background: #f9fafb !important; border: 1.5px solid #e5e7eb !important; border-radius: 10px !important; color: #111 !important; }
 div[data-testid="stSelectbox"] > div > div { background: #f9fafb !important; border: 1.5px solid #e5e7eb !important; border-radius: 10px !important; }
-div[data-testid="stNumberInput"] label, div[data-testid="stSelectbox"] label { font-size: 0.75rem !important; font-weight: 600 !important; color: #666 !important; text-transform: uppercase !important; letter-spacing: 0.04em !important; }
+div[data-testid="stNumberInput"] label, div[data-testid="stSelectbox"] label { font-size: 0.72rem !important; font-weight: 600 !important; color: #666 !important; text-transform: uppercase !important; letter-spacing: 0.04em !important; }
+
+/* BUTTON */
 div[data-testid="stButton"] > button { background: linear-gradient(135deg, #9b0030, #c1121f) !important; color: white !important; border: none !important; border-radius: 14px !important; padding: 16px 40px !important; font-family: 'Outfit', sans-serif !important; font-size: 1rem !important; font-weight: 700 !important; letter-spacing: 0.06em !important; width: 100% !important; box-shadow: 0 4px 20px rgba(155,0,48,0.4) !important; }
 div[data-testid="stButton"] > button:hover { transform: translateY(-2px) !important; }
-.res-high { background: linear-gradient(135deg,#7b0020,#c1121f) !important; border-radius: 20px !important; padding: 40px !important; text-align: center !important; color: white !important; box-shadow: 0 12px 40px rgba(155,0,48,0.4) !important; margin: 20px 0 !important; }
-.res-low  { background: linear-gradient(135deg,#14532d,#15803d) !important; border-radius: 20px !important; padding: 40px !important; text-align: center !important; color: white !important; box-shadow: 0 12px 40px rgba(21,128,61,0.38) !important; margin: 20px 0 !important; }
-.r-emoji { font-size:3rem; display:block; margin-bottom:10px; }
-.r-title { font-family:'Outfit',sans-serif; font-size:2rem; font-weight:900; margin:0 0 6px; }
-.r-pct   { font-family:'Outfit',sans-serif; font-size:5rem; font-weight:900; line-height:1; margin:10px 0; }
+
+/* RESULT CARDS */
+.res-high { background: linear-gradient(135deg,#7b0020,#c1121f) !important; border-radius: 20px !important; padding: clamp(24px,4vw,40px) !important; text-align: center !important; color: white !important; box-shadow: 0 12px 40px rgba(155,0,48,0.4) !important; margin: 20px 0 !important; }
+.res-low  { background: linear-gradient(135deg,#14532d,#15803d) !important; border-radius: 20px !important; padding: clamp(24px,4vw,40px) !important; text-align: center !important; color: white !important; box-shadow: 0 12px 40px rgba(21,128,61,0.38) !important; margin: 20px 0 !important; }
+.r-emoji { font-size:clamp(2rem,5vw,3rem); display:block; margin-bottom:10px; }
+.r-title { font-family:'Outfit',sans-serif; font-size:clamp(1.3rem,3vw,2rem); font-weight:900; margin:0 0 6px; }
+.r-pct   { font-family:'Outfit',sans-serif; font-size:clamp(3rem,8vw,5rem); font-weight:900; line-height:1; margin:10px 0; }
 .r-cap   { font-size:0.85rem; opacity:0.6; }
 .r-track { height:10px; background:rgba(255,255,255,0.15); border-radius:999px; overflow:hidden; margin:18px auto; max-width:360px; }
 .r-fill  { height:100%; border-radius:999px; background:linear-gradient(90deg,rgba(255,255,255,0.4),white); }
 .r-pill  { display:inline-block; border-radius:999px; padding:6px 20px; font-weight:700; font-size:0.78rem; letter-spacing:0.1em; margin-top:14px; background:rgba(255,255,255,0.15); color:white; border:1px solid rgba(255,255,255,0.3); }
-.causes-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 4px; }
-.cause-card  { background: white; border-radius: 14px; padding: 20px; border: 1px solid #e5e7eb; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-.cause-icon  { font-size: 2rem; margin-bottom: 10px; display: block; }
-.cause-title { font-family:'Outfit',sans-serif; font-size:0.95rem; font-weight:700; color:#1a1a2e; margin-bottom:6px; }
-.cause-desc  { font-size:0.78rem; color:#6b7280; line-height:1.6; }
-.sug-grid  { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; margin-top: 4px; }
-.sug-card  { border-radius: 14px; padding: 18px 20px; border-left: 4px solid; }
+
+/* CAUSES GRID - responsive */
+.causes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-top: 4px;
+}
+.cause-card  { background: white; border-radius: 14px; padding: 18px; border: 1px solid #e5e7eb; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.cause-icon  { font-size: 1.8rem; margin-bottom: 8px; display: block; }
+.cause-title { font-family:'Outfit',sans-serif; font-size:0.9rem; font-weight:700; color:#1a1a2e; margin-bottom:5px; }
+.cause-desc  { font-size:0.76rem; color:#6b7280; line-height:1.6; }
+
+/* SUGGESTIONS GRID - responsive */
+.sug-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+    margin-top: 4px;
+}
+.sug-card  { border-radius: 14px; padding: 16px 18px; border-left: 4px solid; }
 .sug-card.red    { background:#fff5f5; border-color:#e63946; }
 .sug-card.orange { background:#fff7ed; border-color:#f97316; }
 .sug-card.green  { background:#f0fdf4; border-color:#22c55e; }
 .sug-card.blue   { background:#eff6ff; border-color:#3b82f6; }
 .sug-card.purple { background:#f5f3ff; border-color:#8b5cf6; }
 .sug-card.teal   { background:#f0fdfa; border-color:#14b8a6; }
-.sug-title { font-family:'Outfit',sans-serif; font-size:0.9rem; font-weight:700; margin-bottom:5px; color:#1a1a2e; display:flex; align-items:center; gap:8px; }
-.sug-text  { font-size:0.78rem; color:#4b5563; line-height:1.6; }
+.sug-title { font-family:'Outfit',sans-serif; font-size:0.88rem; font-weight:700; margin-bottom:5px; color:#1a1a2e; }
+.sug-text  { font-size:0.76rem; color:#4b5563; line-height:1.6; }
+
 .warn { background:#fffbeb; border-left:4px solid #f59e0b; border-radius:10px; padding:14px 18px; font-size:0.85rem; color:#92400e; margin:12px 0; }
 .foot { background:#1a1a2e; color:rgba(255,255,255,0.3); text-align:center; padding:24px; font-size:0.76rem; margin-top:60px; letter-spacing:0.03em; }
 </style>
@@ -180,6 +215,7 @@ model, scaler, encoders, feature_cols = load_model()
 
 st.markdown('<div class="wrap">', unsafe_allow_html=True)
 
+# ── CAUSES ────────────────────────────────────────────────────────────────────
 st.markdown("""
 <div class="sec-head">
   <div class="sec-icon ic-orange">⚠️</div>
@@ -203,6 +239,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
+# ── PERSONAL ──────────────────────────────────────────────────────────────────
 st.markdown("""
 <div class="sec-head">
   <div class="sec-icon ic-red">👤</div>
@@ -213,13 +250,14 @@ st.markdown("""
 </div>
 <div class="card">
 """, unsafe_allow_html=True)
-c1, c2, c3, c4 = st.columns(4)
+c1, c2, c3, c4 = st.columns([1,1,1,1])
 with c1: age = st.number_input("AGE (YEARS)", min_value=0, max_value=120, value=0)
 with c2: gender = st.selectbox("GENDER", ["Select","Male","Female"])
 with c3: bmi = st.number_input("BMI", min_value=0.0, max_value=70.0, value=0.0, step=0.1)
 with c4: sleep = st.number_input("SLEEP HOURS/DAY", min_value=0, max_value=24, value=0)
 st.markdown('</div>', unsafe_allow_html=True)
 
+# ── CLINICAL ──────────────────────────────────────────────────────────────────
 st.markdown("""
 <div class="sec-head">
   <div class="sec-icon ic-blue">🔬</div>
@@ -242,6 +280,7 @@ with c3:
     homo = st.number_input("HOMOCYSTEINE (µmol/L)", min_value=0.0, max_value=100.0, value=0.0, step=0.1)
 st.markdown('</div>', unsafe_allow_html=True)
 
+# ── LIFESTYLE ─────────────────────────────────────────────────────────────────
 st.markdown("""
 <div class="sec-head">
   <div class="sec-icon ic-green">🏃</div>
@@ -252,22 +291,21 @@ st.markdown("""
 </div>
 <div class="card">
 """, unsafe_allow_html=True)
-c1, c2, c3, c4, c5 = st.columns(5)
+c1, c2 = st.columns(2)
 with c1:
-    smoking  = st.selectbox("SMOKING",       ["Select","Yes","No"])
-    diabetes = st.selectbox("DIABETES",       ["Select","Yes","No"])
-with c2:
-    fam_hist = st.selectbox("FAMILY HISTORY", ["Select","Yes","No"])
-    high_bp  = st.selectbox("HIGH BP",        ["Select","Yes","No"])
-with c3:
-    low_hdl  = st.selectbox("LOW HDL",        ["Select","Yes","No"])
-    high_ldl = st.selectbox("HIGH LDL",       ["Select","Yes","No"])
-with c4:
-    exercise = st.selectbox("EXERCISE",       ["Select","Regular","Occasional","None"])
-    alcohol  = st.selectbox("ALCOHOL",        ["Select","Heavy","Moderate","None"])
-with c5:
-    stress   = st.selectbox("STRESS LEVEL",   ["Select","High","Medium","Low"])
-    sugar    = st.selectbox("SUGAR INTAKE",   ["Select","High","Medium","Low"])
+    r1, r2 = st.columns(2)
+    with r1:
+        smoking  = st.selectbox("SMOKING",       ["Select","Yes","No"])
+        fam_hist = st.selectbox("FAMILY HISTORY", ["Select","Yes","No"])
+        low_hdl  = st.selectbox("LOW HDL",        ["Select","Yes","No"])
+        exercise = st.selectbox("EXERCISE",       ["Select","Regular","Occasional","None"])
+        stress   = st.selectbox("STRESS LEVEL",   ["Select","High","Medium","Low"])
+    with r2:
+        diabetes = st.selectbox("DIABETES",       ["Select","Yes","No"])
+        high_bp  = st.selectbox("HIGH BP",        ["Select","Yes","No"])
+        high_ldl = st.selectbox("HIGH LDL",       ["Select","Yes","No"])
+        alcohol  = st.selectbox("ALCOHOL",        ["Select","Heavy","Moderate","None"])
+        sugar    = st.selectbox("SUGAR INTAKE",   ["Select","High","Medium","Low"])
 st.markdown('</div>', unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
@@ -275,6 +313,7 @@ _, btn_col, _ = st.columns([1,2,1])
 with btn_col:
     predict = st.button("❤️  ANALYZE HEART DISEASE RISK")
 
+# ── PREDICTION ────────────────────────────────────────────────────────────────
 if predict:
     selects = [gender, smoking, diabetes, fam_hist, high_bp, low_hdl, high_ldl, exercise, alcohol, stress, sugar]
     nums    = [age, bmi, bp, chol, trig, fbs, crp, homo, sleep]
