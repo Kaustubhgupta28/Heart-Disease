@@ -1,55 +1,14 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.model_selection import train_test_split
 import xgboost as xgb
 import warnings
-import streamlit.components.v1 as components
 warnings.filterwarnings('ignore')
 
 st.set_page_config(page_title="Heart Disease Prediction", page_icon="❤️", layout="wide", initial_sidebar_state="collapsed")
-
-# Inject particles via iframe - this ALWAYS works in Streamlit
-PARTICLES_IFRAME = """
-<iframe srcdoc='
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-* { margin:0; padding:0; overflow:hidden; }
-body { background:transparent; width:100vw; height:100vh; }
-.p { position:fixed; bottom:-60px; font-size:20px; pointer-events:none; animation:rise linear infinite; }
-@keyframes rise {
-  0%   { transform:translateY(0) rotate(0deg) scale(1);   opacity:0; }
-  10%  { opacity:1; }
-  85%  { opacity:0.8; }
-  100% { transform:translateY(-105vh) rotate(360deg) scale(0.4); opacity:0; }
-}
-</style>
-</head>
-<body>
-<script>
-const emojis = ["❤️","🩷","💗","💕","🌹","🌸","🌺","🌷","💐"];
-function spawn() {
-  const el = document.createElement("div");
-  el.className = "p";
-  el.innerText = emojis[Math.floor(Math.random()*emojis.length)];
-  el.style.left = (Math.random()*100) + "vw";
-  el.style.fontSize = (12 + Math.random()*18) + "px";
-  const dur = 4 + Math.random()*7;
-  el.style.animationDuration = dur + "s";
-  el.style.animationDelay = (Math.random()*2) + "s";
-  document.body.appendChild(el);
-  setTimeout(() => el.remove(), (dur+2)*1000);
-}
-setInterval(spawn, 350);
-for(let i=0;i<15;i++) setTimeout(spawn, i*200);
-</script>
-</body>
-</html>
-' style="position:fixed;top:0;left:0;width:100%;height:100%;border:none;pointer-events:none;z-index:99999;background:transparent;" allowtransparency="true"></iframe>
-"""
 
 CSS = """
 <style>
@@ -108,6 +67,55 @@ header {visibility: hidden;}
 .vd2{width:38px;height:38px;bottom:15%;right:4%;}
 .vd3{width:25px;height:25px;top:20%;right:28%;}
 .wrap {padding: clamp(20px, 4vw, 40px) clamp(16px, 6vw, 80px) 60px !important; position: relative !important;}
+
+/* FLOATING PARTICLES - pure CSS */
+.particles-container {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    pointer-events: none !important;
+    z-index: 9999 !important;
+    overflow: hidden !important;
+}
+.particle {
+    position: absolute !important;
+    animation: floatUp linear infinite !important;
+    opacity: 0 !important;
+}
+@keyframes floatUp {
+    0%   { bottom: -80px; opacity: 0; transform: translateX(0px) rotate(0deg) scale(1); }
+    10%  { opacity: 1; }
+    50%  { transform: translateX(40px) rotate(180deg) scale(0.8); }
+    85%  { opacity: 0.8; }
+    100% { bottom: 110vh; opacity: 0; transform: translateX(-20px) rotate(360deg) scale(0.3); }
+}
+.p1  { left:3%;   font-size:18px; animation-duration:7s;  animation-delay:0s;   }
+.p2  { left:9%;   font-size:14px; animation-duration:9s;  animation-delay:1.2s; }
+.p3  { left:15%;  font-size:22px; animation-duration:6s;  animation-delay:0.5s; }
+.p4  { left:22%;  font-size:16px; animation-duration:8s;  animation-delay:2.1s; }
+.p5  { left:29%;  font-size:12px; animation-duration:7s;  animation-delay:3.0s; }
+.p6  { left:36%;  font-size:20px; animation-duration:10s; animation-delay:0.8s; }
+.p7  { left:43%;  font-size:15px; animation-duration:6s;  animation-delay:1.7s; }
+.p8  { left:50%;  font-size:18px; animation-duration:8s;  animation-delay:2.5s; }
+.p9  { left:57%;  font-size:13px; animation-duration:9s;  animation-delay:0.3s; }
+.p10 { left:64%;  font-size:21px; animation-duration:7s;  animation-delay:3.8s; }
+.p11 { left:71%;  font-size:16px; animation-duration:6s;  animation-delay:1.0s; }
+.p12 { left:78%;  font-size:14px; animation-duration:8s;  animation-delay:2.9s; }
+.p13 { left:85%;  font-size:19px; animation-duration:7s;  animation-delay:0.6s; }
+.p14 { left:91%;  font-size:12px; animation-duration:9s;  animation-delay:4.2s; }
+.p15 { left:97%;  font-size:17px; animation-duration:6s;  animation-delay:1.5s; }
+.p16 { left:6%;   font-size:20px; animation-duration:11s; animation-delay:3.3s; }
+.p17 { left:18%;  font-size:13px; animation-duration:8s;  animation-delay:5.0s; }
+.p18 { left:33%;  font-size:16px; animation-duration:7s;  animation-delay:2.2s; }
+.p19 { left:47%;  font-size:22px; animation-duration:9s;  animation-delay:4.5s; }
+.p20 { left:62%;  font-size:14px; animation-duration:6s;  animation-delay:1.8s; }
+.p21 { left:74%;  font-size:18px; animation-duration:10s; animation-delay:0.9s; }
+.p22 { left:88%;  font-size:15px; animation-duration:7s;  animation-delay:3.6s; }
+.p23 { left:25%;  font-size:11px; animation-duration:8s;  animation-delay:6.0s; }
+.p24 { left:55%;  font-size:20px; animation-duration:9s;  animation-delay:2.7s; }
+
 .sec-head { display: flex !important; align-items: center !important; gap: 14px !important; margin: 28px 0 14px !important; flex-wrap: wrap !important; }
 .sec-icon { width: 40px !important; height: 40px !important; border-radius: 10px !important; display: flex !important; align-items: center !important; justify-content: center !important; font-size: 1.1rem !important; flex-shrink: 0 !important; }
 .ic-red    { background: linear-gradient(135deg,#9b0030,#c1121f) !important; }
@@ -154,43 +162,36 @@ div[data-testid="stButton"] > button:hover { transform: translateY(-2px) !import
 
 st.markdown('<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">', unsafe_allow_html=True)
 st.markdown(CSS, unsafe_allow_html=True)
-components.html("""
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-* { margin:0; padding:0; }
-body { background:transparent; overflow:hidden; }
-.p { position:fixed; bottom:-60px; pointer-events:none; z-index:999999; }
-@keyframes rise {
-  0%   { transform:translateY(0) rotate(0deg) scale(1); opacity:0; }
-  10%  { opacity:1; }
-  85%  { opacity:0.9; }
-  100% { transform:translateY(-105vh) rotate(360deg) scale(0.3); opacity:0; }
-}
-</style>
-</head>
-<body>
-<script>
-const emojis = ["❤️","🩷","💗","💕","💖","🌹","🌸","🌺","🌷","💐"];
-function spawn() {
-  const el = document.createElement("div");
-  el.className = "p";
-  el.innerText = emojis[Math.floor(Math.random()*emojis.length)];
-  el.style.left = (Math.random()*100) + "vw";
-  el.style.fontSize = (14 + Math.random()*20) + "px";
-  const dur = 5 + Math.random()*7;
-  el.style.animation = "rise " + dur + "s linear forwards";
-  el.style.animationDelay = (Math.random()*1) + "s";
-  document.body.appendChild(el);
-  setTimeout(() => el.remove(), (dur+2)*1000);
-  setTimeout(spawn, 300 + Math.random()*500);
-}
-for(let i=0;i<12;i++) setTimeout(spawn, i*300);
-</script>
-</body>
-</html>
-""", height=0)
+
+# Pure CSS floating particles - no JavaScript needed
+st.markdown("""
+<div class="particles-container">
+  <span class="particle p1">❤️</span>
+  <span class="particle p2">🌹</span>
+  <span class="particle p3">🩷</span>
+  <span class="particle p4">🌸</span>
+  <span class="particle p5">💗</span>
+  <span class="particle p6">🌺</span>
+  <span class="particle p7">❤️</span>
+  <span class="particle p8">🌷</span>
+  <span class="particle p9">🩷</span>
+  <span class="particle p10">💐</span>
+  <span class="particle p11">🌹</span>
+  <span class="particle p12">💗</span>
+  <span class="particle p13">❤️</span>
+  <span class="particle p14">🌸</span>
+  <span class="particle p15">🩷</span>
+  <span class="particle p16">🌺</span>
+  <span class="particle p17">💕</span>
+  <span class="particle p18">🌹</span>
+  <span class="particle p19">❤️</span>
+  <span class="particle p20">🌷</span>
+  <span class="particle p21">🩷</span>
+  <span class="particle p22">💗</span>
+  <span class="particle p23">🌸</span>
+  <span class="particle p24">🌺</span>
+</div>
+""", unsafe_allow_html=True)
 
 st.markdown("""
 <div class="hero">
