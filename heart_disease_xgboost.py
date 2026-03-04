@@ -17,7 +17,7 @@ header {visibility: hidden;}
 .stDeployButton {display: none;}
 [data-testid="stToolbar"] {display: none;}
 .stApp > header {display: none;}
-.stApp {background-color: #f0f2f5 !important;}
+.stApp {background-color: #fff0f0 !important;}
 .main .block-container {
     padding-top: 0 !important;
     padding-bottom: 0 !important;
