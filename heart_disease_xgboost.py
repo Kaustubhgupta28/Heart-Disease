@@ -25,6 +25,10 @@ header {visibility: hidden;}
     padding-right: 0 !important;
     max-width: 100% !important;
 }
+/* FIX: remove all extra space */
+.block-container > div:first-child { margin-top: 0 !important; padding-top: 0 !important; }
+section[data-testid="stMain"] > div { padding-top: 0 !important; }
+
 .hero {
     background: linear-gradient(135deg, #7b0020, #9b0030, #6d001c) !important;
     padding: clamp(30px, 5vw, 60px) clamp(20px, 6vw, 80px) !important;
@@ -35,6 +39,7 @@ header {visibility: hidden;}
     position: relative !important;
     flex-wrap: wrap !important;
     gap: 20px !important;
+    overflow: visible !important;
 }
 .hero h1 {
     font-family: 'Outfit', sans-serif !important;
@@ -71,52 +76,50 @@ header {visibility: hidden;}
 .vd2{width:38px;height:38px;bottom:15%;right:4%;}
 .vd3{width:25px;height:25px;top:20%;right:28%;}
 
-/* PAGE WRAPPER for particles */
-.page-wrap {
-    position: relative !important;
-    overflow: hidden !important;
-    min-height: 100vh !important;
-}
-
-/* FLOATING PARTICLES */
+/* FLOATING PARTICLES - fixed to screen */
 @keyframes rise {
-    0%   { transform: translateY(0vh) translateX(0px) rotate(0deg) scale(1); opacity:0; }
+    0%   { transform: translateY(0) translateX(0px)   rotate(0deg)   scale(1);   opacity:0; }
     8%   { opacity: 1; }
-    50%  { transform: translateY(-50vh) translateX(30px) rotate(180deg) scale(0.8); opacity:0.9; }
-    92%  { opacity: 0.6; }
-    100% { transform: translateY(-105vh) translateX(-20px) rotate(360deg) scale(0.4); opacity:0; }
+    50%  { transform: translateY(-50vh) translateX(25px)  rotate(180deg) scale(0.85); opacity:0.9; }
+    92%  { opacity: 0.7; }
+    100% { transform: translateY(-102vh) translateX(-15px) rotate(360deg) scale(0.4); opacity:0; }
 }
 .pwrap {
-    position: absolute !important;
-    top: 0 !important;
+    position: fixed !important;
+    bottom: 0 !important;
     left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
+    width: 100vw !important;
+    height: 0 !important;
     pointer-events: none !important;
-    z-index: 0 !important;
-    overflow: hidden !important;
+    z-index: 99999 !important;
 }
-.p { position: absolute !important; animation: rise linear infinite !important; }
-.p01{left:2%;   top:95%; font-size:16px; animation-duration:7s;  animation-delay:0s;   }
-.p02{left:7%;   top:90%; font-size:12px; animation-duration:9s;  animation-delay:1.3s; }
-.p03{left:13%;  top:98%; font-size:20px; animation-duration:6s;  animation-delay:0.5s; }
-.p04{left:19%;  top:92%; font-size:14px; animation-duration:8s;  animation-delay:2.2s; }
-.p05{left:26%;  top:96%; font-size:11px; animation-duration:7s;  animation-delay:3.1s; }
-.p06{left:33%;  top:89%; font-size:18px; animation-duration:10s; animation-delay:0.9s; }
-.p07{left:40%;  top:94%; font-size:13px; animation-duration:7s;  animation-delay:1.8s; }
-.p08{left:47%;  top:97%; font-size:16px; animation-duration:8s;  animation-delay:2.6s; }
-.p09{left:54%;  top:91%; font-size:11px; animation-duration:9s;  animation-delay:0.4s; }
-.p10{left:61%;  top:95%; font-size:19px; animation-duration:6s;  animation-delay:3.9s; }
-.p11{left:68%;  top:88%; font-size:14px; animation-duration:7s;  animation-delay:1.1s; }
-.p12{left:75%;  top:93%; font-size:12px; animation-duration:8s;  animation-delay:3.0s; }
-.p13{left:82%;  top:96%; font-size:17px; animation-duration:6s;  animation-delay:0.7s; }
-.p14{left:89%;  top:90%; font-size:15px; animation-duration:9s;  animation-delay:4.3s; }
-.p15{left:95%;  top:97%; font-size:20px; animation-duration:11s; animation-delay:1.6s; }
-.p16{left:10%;  top:60%; font-size:13px; animation-duration:8s;  animation-delay:5.1s; }
-.p17{left:35%;  top:70%; font-size:16px; animation-duration:7s;  animation-delay:2.4s; }
-.p18{left:58%;  top:55%; font-size:18px; animation-duration:9s;  animation-delay:3.7s; }
-.p19{left:80%;  top:65%; font-size:11px; animation-duration:6s;  animation-delay:1.9s; }
-.p20{left:50%;  top:80%; font-size:14px; animation-duration:10s; animation-delay:0.2s; }
+.p {
+    position: fixed !important;
+    bottom: -30px !important;
+    animation: rise linear infinite !important;
+    pointer-events: none !important;
+    z-index: 99999 !important;
+}
+.p01{left:2%;   font-size:16px; animation-duration:7s;  animation-delay:0s;   }
+.p02{left:7%;   font-size:12px; animation-duration:9s;  animation-delay:1.3s; }
+.p03{left:13%;  font-size:20px; animation-duration:6s;  animation-delay:0.5s; }
+.p04{left:19%;  font-size:14px; animation-duration:8s;  animation-delay:2.2s; }
+.p05{left:26%;  font-size:11px; animation-duration:7s;  animation-delay:3.1s; }
+.p06{left:33%;  font-size:18px; animation-duration:10s; animation-delay:0.9s; }
+.p07{left:40%;  font-size:13px; animation-duration:7s;  animation-delay:1.8s; }
+.p08{left:47%;  font-size:16px; animation-duration:8s;  animation-delay:2.6s; }
+.p09{left:54%;  font-size:11px; animation-duration:9s;  animation-delay:0.4s; }
+.p10{left:61%;  font-size:19px; animation-duration:6s;  animation-delay:3.9s; }
+.p11{left:68%;  font-size:14px; animation-duration:7s;  animation-delay:1.1s; }
+.p12{left:75%;  font-size:12px; animation-duration:8s;  animation-delay:3.0s; }
+.p13{left:82%;  font-size:17px; animation-duration:6s;  animation-delay:0.7s; }
+.p14{left:89%;  font-size:15px; animation-duration:9s;  animation-delay:4.3s; }
+.p15{left:95%;  font-size:20px; animation-duration:11s; animation-delay:1.6s; }
+.p16{left:10%;  font-size:13px; animation-duration:8s;  animation-delay:5.1s; }
+.p17{left:35%;  font-size:16px; animation-duration:7s;  animation-delay:2.4s; }
+.p18{left:58%;  font-size:18px; animation-duration:9s;  animation-delay:3.7s; }
+.p19{left:80%;  font-size:11px; animation-duration:6s;  animation-delay:1.9s; }
+.p20{left:50%;  font-size:14px; animation-duration:10s; animation-delay:0.2s; }
 
 .wrap {padding: clamp(20px, 4vw, 40px) clamp(16px, 6vw, 80px) 60px !important; position: relative !important; z-index:1 !important;}
 .sec-head { display: flex !important; align-items: center !important; gap: 14px !important; margin: 28px 0 14px !important; flex-wrap: wrap !important; }
@@ -167,7 +170,6 @@ st.markdown('<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@70
 st.markdown(CSS, unsafe_allow_html=True)
 
 st.markdown("""
-<div class="page-wrap">
 <div class="pwrap">
   <span class="p p01">❤️</span>
   <span class="p p02">🌹</span>
@@ -470,5 +472,5 @@ if predict:
 
         st.markdown('<p style="font-size:0.74rem;color:#9ca3af;text-align:center;margin-top:16px;">⚕️ This tool can help you understand your heart health — but always consult a qualified doctor before making any medical decisions.</p>', unsafe_allow_html=True)
 
-st.markdown('</div></div>', unsafe_allow_html=True)
+st.markdown('</div>', unsafe_allow_html=True)
 st.markdown('<div class="foot">❤️ Heart Disease Prediction &nbsp;·&nbsp; Powered by XGBoost &nbsp;·&nbsp; For educational use only</div>', unsafe_allow_html=True)
