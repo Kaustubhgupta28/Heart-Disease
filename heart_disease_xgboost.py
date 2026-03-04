@@ -61,32 +61,11 @@ header {visibility: hidden;}
     justify-content: center !important;
 }
 @keyframes hb { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
-@keyframes fly {
-    0%   { transform: translateY(0px) translateX(0px) scale(1); opacity: 0; }
-    10%  { opacity: 1; }
-    90%  { opacity: 0.7; }
-    100% { transform: translateY(-100vh) translateX(30px) scale(0.5); opacity: 0; }
-}
-@keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.3)} }
-.floating-hearts { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; overflow: hidden; }
-.fh { position: absolute; bottom: -50px; animation: fly linear infinite; }
-.fh:nth-child(1)  { left: 5%;  font-size: 0.8rem;  animation-duration: 6s;  animation-delay: 0s; }
-.fh:nth-child(2)  { left: 12%; font-size: 1.4rem;  animation-duration: 8s;  animation-delay: 1s; }
-.fh:nth-child(3)  { left: 20%; font-size: 0.7rem;  animation-duration: 5s;  animation-delay: 2s; }
-.fh:nth-child(4)  { left: 30%; font-size: 1.1rem;  animation-duration: 9s;  animation-delay: 0.5s; }
-.fh:nth-child(5)  { left: 40%; font-size: 0.9rem;  animation-duration: 7s;  animation-delay: 3s; }
-.fh:nth-child(6)  { left: 50%; font-size: 1.3rem;  animation-duration: 6s;  animation-delay: 1.5s; }
-.fh:nth-child(7)  { left: 60%; font-size: 0.75rem; animation-duration: 8s;  animation-delay: 2.5s; }
-.fh:nth-child(8)  { left: 70%; font-size: 1.0rem;  animation-duration: 5s;  animation-delay: 0.8s; }
-.fh:nth-child(9)  { left: 80%; font-size: 1.5rem;  animation-duration: 10s; animation-delay: 1.2s; }
-.fh:nth-child(10) { left: 90%; font-size: 0.85rem; animation-duration: 7s;  animation-delay: 3.5s; }
-.fh:nth-child(11) { left: 25%; font-size: 0.6rem;  animation-duration: 6s;  animation-delay: 4s; }
-.fh:nth-child(12) { left: 75%; font-size: 1.2rem;  animation-duration: 9s;  animation-delay: 2s; }
 .vdot { position: absolute !important; border-radius: 50% !important; background: radial-gradient(circle at 30% 30%, rgba(255,150,150,0.5), rgba(180,30,60,0.7)) !important; }
 .vd1{width:55px;height:55px;top:15%;right:8%;}
 .vd2{width:38px;height:38px;bottom:15%;right:4%;}
 .vd3{width:25px;height:25px;top:20%;right:28%;}
-.wrap {padding: clamp(20px, 4vw, 40px) clamp(16px, 6vw, 80px) 60px !important;}
+.wrap {padding: clamp(20px, 4vw, 40px) clamp(16px, 6vw, 80px) 60px !important; position: relative !important;}
 .sec-head { display: flex !important; align-items: center !important; gap: 14px !important; margin: 28px 0 14px !important; flex-wrap: wrap !important; }
 .sec-icon { width: 40px !important; height: 40px !important; border-radius: 10px !important; display: flex !important; align-items: center !important; justify-content: center !important; font-size: 1.1rem !important; flex-shrink: 0 !important; }
 .ic-red    { background: linear-gradient(135deg,#9b0030,#c1121f) !important; }
@@ -131,8 +110,76 @@ div[data-testid="stButton"] > button:hover { transform: translateY(-2px) !import
 </style>
 """
 
+PARTICLES_JS = """
+<script>
+(function() {
+  const items = [
+    { t: '❤️',  size: 18 },
+    { t: '🩷',  size: 16 },
+    { t: '💗',  size: 14 },
+    { t: '🌹',  size: 20 },
+    { t: '🌸',  size: 18 },
+    { t: '🌺',  size: 16 },
+  ];
+
+  function spawnParticle() {
+    const pick = items[Math.floor(Math.random() * items.length)];
+    const el   = document.createElement('div');
+    const size = pick.size + Math.random() * 10;
+    const left = Math.random() * 100;
+    const dur  = 5 + Math.random() * 8;
+    const drift= (Math.random() - 0.5) * 120;
+
+    el.innerText = pick.t;
+    el.style.cssText = [
+      'position:fixed',
+      'bottom:-60px',
+      'left:' + left + 'vw',
+      'font-size:' + size + 'px',
+      'pointer-events:none',
+      'z-index:99999',
+      'opacity:0',
+      'transition:none',
+      'user-select:none',
+    ].join(';');
+
+    document.body.appendChild(el);
+
+    const start = performance.now();
+    function animate(now) {
+      const elapsed = (now - start) / 1000;
+      const progress = elapsed / dur;
+      if (progress >= 1) { el.remove(); return; }
+      const y   = -window.innerHeight * progress - 60;
+      const x   = drift * Math.sin(progress * Math.PI * 2);
+      const rot = progress * 360;
+      const scale = 0.6 + Math.sin(progress * Math.PI) * 0.6;
+      let opacity = 1;
+      if (progress < 0.1) opacity = progress / 0.1;
+      else if (progress > 0.8) opacity = (1 - progress) / 0.2;
+      el.style.transform = 'translateY(' + y + 'px) translateX(' + x + 'px) rotate(' + rot + 'deg) scale(' + scale + ')';
+      el.style.opacity = opacity;
+      requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+    setTimeout(spawnParticle, 300 + Math.random() * 600);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', spawnParticle);
+  } else {
+    spawnParticle();
+  }
+  for (let i = 0; i < 8; i++) {
+    setTimeout(spawnParticle, i * 400);
+  }
+})();
+</script>
+"""
+
 st.markdown('<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">', unsafe_allow_html=True)
 st.markdown(CSS, unsafe_allow_html=True)
+st.markdown(PARTICLES_JS, unsafe_allow_html=True)
 
 st.markdown("""
 <div class="hero">
@@ -238,23 +285,7 @@ def load_model():
 
 model, scaler, encoders, feature_cols = load_model()
 
-st.markdown("""
-<div class="floating-hearts">
-  <span class="fh">❤️</span>
-  <span class="fh">🩷</span>
-  <span class="fh">❤️</span>
-  <span class="fh">💗</span>
-  <span class="fh">❤️</span>
-  <span class="fh">🩷</span>
-  <span class="fh">💗</span>
-  <span class="fh">❤️</span>
-  <span class="fh">🩷</span>
-  <span class="fh">❤️</span>
-  <span class="fh">💗</span>
-  <span class="fh">🩷</span>
-</div>
-<div class="wrap">
-""", unsafe_allow_html=True)
+st.markdown('<div class="wrap">', unsafe_allow_html=True)
 
 st.markdown("""
 <div class="sec-head">
