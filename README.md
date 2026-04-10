@@ -99,9 +99,9 @@ Heart-Disease/
 ## 👤 Author
 
 **Kaustubh Gupta**
-- 📧 kaustubhgupta2807@gmail.com
-- 🔗 [LinkedIn](https://linkedin.com/in/kaustubh-gupta-498b7a273)
-- 🐙 [GitHub](https://github.com/Kaustubhgupta28)
+
+- 🔗 [LinkedIn]=https://www.linkedin.com/in/kaustubh-gupta-498b7a273/
+- 🐙 [GitHub]=https://github.com/Kaustubhgupta28
 
 ---
 
