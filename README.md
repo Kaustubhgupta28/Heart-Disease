@@ -2,6 +2,8 @@
 
 A Machine Learning web application that predicts the risk of heart disease based on 15+ patient health parameters including clinical measurements and lifestyle factors.
 
+🔗 **[Live Demo](https://heart-risk-predictor-ai.streamlit.app)**
+
 ---
 
 ## 📌 Overview
@@ -87,13 +89,17 @@ Heart-Disease/
 
 ## 📷 Demo
 
-> Add screenshot of your web interface here
+🔗 [Live Demo](https://heart-risk-predictor-ai.streamlit.app)
+
+<img width="1919" height="1084" alt="image" src="https://github.com/user-attachments/assets/c22c7957-ebf2-4813-ac0c-1361f2700157" />
+
 
 ---
 
 ## 👤 Author
 
 **Kaustubh Gupta**
+- 📧 kaustubhgupta2807@gmail.com
 - 🔗 [LinkedIn](https://linkedin.com/in/kaustubh-gupta-498b7a273)
 - 🐙 [GitHub](https://github.com/Kaustubhgupta28)
 
